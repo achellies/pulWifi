@@ -19,18 +19,18 @@ You can freely contribute through our GitHub repository (https://github.com/pulW
 
 GETTING THE CODE
 ----------------
-We host our code in a git server. For cloning our code you must use the git command:
+We host our code in a git server. For cloning our code you must use the git command:  
 ```
 git clone git@github.com:pulWifi/pulWifi.git
 ```
-Once this command has finished its execution you will see a folder containing the code of our project.
-You must navigate to this folder and grab some dependencies of the project. This is done with git submodule:
+Once this command has finished its execution you will see a folder containing the code of our project.  
+You must navigate to this folder and grab some dependencies of the project. This is done with git submodule:  
 ```
 cd pulWifi
 git submodule init
 git submodule update
 ```
-Now everything it is ready for importing the project to eclipse and building.
+Now everything it is ready for importing the project to eclipse and building.  
 
 CODING GUIDELINES
 -----------------
