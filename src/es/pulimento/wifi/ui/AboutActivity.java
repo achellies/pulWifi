@@ -35,6 +35,8 @@ import es.pulimento.wifi.ui.dialogs.ChangelogDialog;
 import es.pulimento.wifi.ui.dialogs.LicenseDialog;
 import es.pulimento.wifi.ui.dialogs.ThirdPartyLicensesDialog;
 
+
+
 public class AboutActivity extends SherlockActivity implements OnClickListener {
 
 	@Override

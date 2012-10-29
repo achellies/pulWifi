@@ -19,7 +19,6 @@
 
 package es.pulimento.wifi.ui.utils;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.Handler;
@@ -122,7 +121,6 @@ public class UpdateChecker implements Runnable {
 	/*
 	 * Class that holds all event handling...
 	 */
-	@SuppressLint("HandlerLeak")
 	public class EventHandler extends Handler {
 		@Override
 		public void handleMessage(Message msg) {

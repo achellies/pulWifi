@@ -19,7 +19,6 @@
 
 package es.pulimento.wifi.ui;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -89,7 +88,6 @@ public class MainActivity extends Activity {
 	/*
 	 * Class that holds all event handling...
 	 */
-	@SuppressLint("HandlerLeak")
 	public class EventHandler extends Handler {
 		@Override
 		public void handleMessage(Message msg) {
