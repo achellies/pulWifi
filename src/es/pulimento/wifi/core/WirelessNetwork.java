@@ -291,8 +291,12 @@ public class WirelessNetwork implements Parcelable, Comparable<WirelessNetwork> 
 	public int compareTo(WirelessNetwork w0) {
 		if(this.isCrackeable() == w0.isCrackeable())
 			return w0.getSignal() - this.getSignal();
-		else
-			return 1;
+		else{
+			if(this.isCrackeable() && !w0.isCrackeable())
+				return -1;
+			else
+				return 1;				
+		}
 	}
 
 	/**
