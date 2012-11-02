@@ -19,15 +19,19 @@
 
 package es.pulimento.wifi.ui.utils;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.Handler;
 import android.os.Message;
+import android.widget.Toast;
 import es.pulimento.wifi.R;
+import es.pulimento.wifi.ui.MainActivity;
 import es.pulimento.wifi.ui.dialogs.UpdateDialog;
 import es.pulimento.wifi.ui.utils.github.Download;
 import es.pulimento.wifi.ui.utils.github.GithubApi;
 
+@SuppressLint("HandlerLeak")
 public class UpdateChecker implements Runnable {
 
 	/*
@@ -52,7 +56,7 @@ public class UpdateChecker implements Runnable {
 		mUpdateDialog = null;
 		mProgressDialog = null;
 
-		if(mHandler == null) {
+		if (mHandler == null) {
 			mProgressDialog = new ProgressDialog(mActivity);
 			mProgressDialog.setTitle("");
 			mProgressDialog.setMessage(mActivity.getString(R.string.dialog_updater_checking));
@@ -68,6 +72,7 @@ public class UpdateChecker implements Runnable {
 		final Download d = (new GithubApi()).getLastDownload();
 		if (d != null) {
 			if (!d.getVersion().equals(mActivity.getString(R.string.app_version))) {
+				// Newer release available
 				mActivity.runOnUiThread(new Runnable() {
 					@Override
 					public void run() {
@@ -75,7 +80,7 @@ public class UpdateChecker implements Runnable {
 						mUpdateDialog.show();
 					}
 				});
-			} else {
+			} else { // Running latest version
 				if (mHandler != null)
 					mHandler.sendEmptyMessage(MSG_UPDATE_DONE);
 				else
@@ -85,6 +90,18 @@ public class UpdateChecker implements Runnable {
 							mProgressDialog.dismiss();
 						}
 					});
+				if (!MainActivity.class.equals(mActivity.getClass())) {// Not at startup
+					mActivity.runOnUiThread(new Runnable() {
+						@Override
+						public void run() {
+							Toast.makeText(
+									mActivity,
+									mActivity.getApplicationContext().getString(
+											R.string.dialog_updater_last), Toast.LENGTH_SHORT)
+									.show();
+						}
+					});
+				}
 			}
 		} else { // Error getting last version available, continue
 			if (mHandler != null)
@@ -96,6 +113,17 @@ public class UpdateChecker implements Runnable {
 						mProgressDialog.dismiss();
 					}
 				});
+			if (!MainActivity.class.equals(mActivity.getClass())) {// Not at startup
+				mActivity.runOnUiThread(new Runnable() {
+					@Override
+					public void run() {
+						Toast.makeText(
+								mActivity,
+								mActivity.getApplicationContext().getString(
+										R.string.dialog_updater_error), Toast.LENGTH_SHORT).show();
+					}
+				});
+			}
 		}
 	}
 
@@ -104,7 +132,7 @@ public class UpdateChecker implements Runnable {
 		 * Do check.
 		 */
 		new Thread(this).start();
-		if(mProgressDialog != null)
+		if (mProgressDialog != null)
 			mProgressDialog.show();
 	}
 
@@ -112,9 +140,9 @@ public class UpdateChecker implements Runnable {
 		/*
 		 * Clean.
 		 */
-		if(mUpdateDialog != null)
+		if (mUpdateDialog != null)
 			mUpdateDialog.dismiss();
-		if(mProgressDialog != null)
+		if (mProgressDialog != null)
 			mProgressDialog.dismiss();
 	}
 

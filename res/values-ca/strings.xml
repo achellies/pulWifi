@@ -37,9 +37,12 @@
     <string name="dialog_updater_checking">"S'està comprovant…"</string>
     <string name="dialog_updater_positive">"Sí"</string>
     <string name="dialog_updater_negative">"No"</string>
+    <string name="dialog_updater_error">Error en l\'actualitzador</string>
+    <string name="dialog_updater_last">Tens la darrera versió disponible</string>
 
     <!-- Preference keys and defaults -->
     <!-- Really not neccesary here, they are language-independent -->
+
 
     <!-- Preferences -->
     <string name="preferences_category_scanmode">"MANERA D'EXPLORACIÓ"</string>

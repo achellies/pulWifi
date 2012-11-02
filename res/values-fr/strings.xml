@@ -37,6 +37,8 @@
     <string name="dialog_updater_positive">"Oui"</string>
     <string name="dialog_updater_negative">"Non"</string>
     <string name="dialog_updater_checking">"Compte chèque…"</string>
+    <string name="dialog_updater_error">Erreur dans la mise à jour</string>
+    <string name="dialog_updater_last">Vous avez la dernière version disponible</string>
 
     <!-- Preference keys and defaults -->
     <!-- Really not neccesary here, they are language-independent -->

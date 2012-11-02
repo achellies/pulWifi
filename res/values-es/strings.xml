@@ -39,9 +39,12 @@
     <string name="dialog_updater_positive">Si</string>
     <string name="dialog_updater_negative">No</string>
     <string name="dialog_updater_checking">Comprobando…</string>
+    <string name="dialog_updater_error">Error obteniendo la última versión</string>
+    <string name="dialog_updater_last">Tienes la última versión disponible</string>
 
     <!-- Preference keys and defaults -->
     <!-- Really not neccesary here, they are language-independent -->
+
 
     <!-- Preferences -->
     <string name="preferences_category_scanmode">BUSCAR REDES</string>

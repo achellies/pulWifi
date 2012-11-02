@@ -37,6 +37,8 @@
     <!-- TO-DO <string name="dialog_updater_message>Hay una nueva actualización, descargarla?? -->
     <string name="dialog_updater_positive">Si</string>
     <string name="dialog_updater_negative">Non</string>
+    <string name="dialog_updater_error">Erro comprobación de actualizacións</string>
+    <string name="dialog_updater_last">Ti ten a última versión dispoñible</string>
 
     <!-- Preferences -->
     <string name="preferences_category_scanmode">MODO AUTOMÁTICO</string>

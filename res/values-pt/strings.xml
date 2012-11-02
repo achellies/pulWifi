@@ -37,6 +37,8 @@
     <string name="dialog_updater_checking">"Verificando…"</string>
     <string name="dialog_updater_positive">"Sim"</string>
     <string name="dialog_updater_negative">"Nao"</string>
+    <string name="dialog_updater_error">Erro verificação de atualizações</string>
+    <string name="dialog_updater_last">Você tem a última versão disponível</string>
 
     <!-- Preference keys and defaults -->
     <!-- Really not neccesary here, they are language-independent -->
