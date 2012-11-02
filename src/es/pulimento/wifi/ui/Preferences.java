@@ -104,7 +104,7 @@ public class Preferences extends SherlockPreferenceActivity {
 				apkVersion = pInfo.versionName;
 				apkVersionCode = pInfo.versionCode;
 			} catch (NameNotFoundException e) {
-				Log.e("pulWifi", "Superuser is not installed?", e);
+				Log.e("pulWifi", "pulWifi is not installed?", e);
 			}
 			return 0;
 		}
