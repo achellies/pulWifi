@@ -23,12 +23,8 @@ import es.pulimento.wifi.core.WirelessNetwork.WirelessEncryption;
 
 /**
  * Huawei algorithm.
-<<<<<<< HEAD
  * Java adaptation of mac2wepkey.py from
- * http://websec.ca/blog/view/mac2wepkey_huawei
-=======
  * Java adaptation of mac2wepkey.py from http://websec.ca/blog/view/mac2wepkey_huawei
->>>>>>> 0757caca386b99e6ed176cdabfe5034f22d8c2fa
  * Most MACs aren't confirmed.
  */
 public class HuaweiAlgorithm extends CrackAlgorithm {
@@ -72,7 +68,7 @@ public class HuaweiAlgorithm extends CrackAlgorithm {
 		addPattern("(.*)", "(00:25:68:[0-9A-Fa-f:]{8})");// Confirmed as valid
 		addPattern("(.*)", "(00:22:A1:[0-9A-Fa-f:]{8})");
 		addPattern("(.*)", "(00:1E:10:[0-9A-Fa-f:]{8})");// Confirmed as valid
-		addPattern("(.*)", "(00:19:15:[0-9A-Fa-f:]{8})");
+		// addPattern("(.*)", "(00:19:15:[0-9A-Fa-f:]{8})");// Some WLAN_XXXX uses it, false positive!
 		addPattern("(.*)", "(00:18:82:[0-9A-Fa-f:]{8})");
 		addPattern("(.*)", "(00:11:F5:[0-9A-Fa-f:]{8})");
 		addPattern("(.*)", "(00:0F:E2:[0-9A-Fa-f:]{8})");
