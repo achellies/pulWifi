@@ -48,13 +48,13 @@ public class ClipboardCopyDialog extends Dialog implements OnItemClickListener {
 
 		// Set content...
 		this.setTitle(R.string.dialog_cipboardcopy_title);
-		this.setContentView(R.layout.dialog_clipboardcopy);
+		this.setContentView(R.layout.dialog_withlistview);
 
 		// Define elements...
 		mContext = context;
 		mPasswords = passwords;
 		mClipboardManager = (ClipboardManager) mContext.getSystemService(Context.CLIPBOARD_SERVICE);
-		mListView = (ListView) findViewById(R.id.dialog_clipboardcopy_list);
+		mListView = (ListView) findViewById(R.id.dialog_withlistview_list);
 
 		// Set adapters...
 		mListView.setAdapter(new ArrayAdapter<String>(mContext, android.R.layout.simple_list_item_1, mPasswords));

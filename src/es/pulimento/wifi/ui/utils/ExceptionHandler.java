@@ -6,6 +6,7 @@ import java.lang.Thread.UncaughtExceptionHandler;
 
 import android.content.res.Resources;
 import android.os.AsyncTask;
+import android.util.Log;
 import es.pulimento.wifi.R;
 import es.pulimento.wifi.ui.utils.github.GithubApi;
 import es.pulimento.wifi.ui.utils.github.Issue;
@@ -26,6 +27,7 @@ public class ExceptionHandler implements UncaughtExceptionHandler {
 
 	@Override
 	public void uncaughtException(Thread t, Throwable e) {
+		Log.e("pulWifi","Uncaught exception!! Reporting...");
 		String version = Resources.getSystem().getString(R.string.app_version);
 		Issue i = new Issue("Exception in " + getFileName(e), "APP VERSION: " + version
 				+ "\nTRACE:\n" + getStackTrace(e) + "\n\nCAUSE TRACE:\n"
