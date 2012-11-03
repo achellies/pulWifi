@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
+    
+    <!-- Update intervals for scan networks -->
 
     <string-array name="preferences_updateintervals_names">
         <item>@string/preferences_updateinterval_fast</item>
@@ -10,6 +12,27 @@
         <item>"2000"</item>
         <item>"4000"</item>
         <item>"8000"</item>
+    </string-array>
+    
+    <!-- Locale chooser -->
+    
+    <string-array name="preferences_localechooser_names">
+        <item>AUTO</item>
+        <item>English</item>
+        <item>Español</item>
+        <item>Português</item>
+        <item>Français</item>
+        <item>Català</item>
+        <item>Galego</item>
+    </string-array>
+    <string-array name="preferences_localechooser_values">
+        <item></item>
+        <item>en</item>
+        <item>es</item>
+        <item>pt</item>
+        <item>fr</item>
+        <item>ca</item>
+        <item>gl</item>
     </string-array>
 
 </resources>

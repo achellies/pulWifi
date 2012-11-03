@@ -20,10 +20,14 @@
 package es.pulimento.wifi.ui;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -44,13 +48,14 @@ public class HomeActivity extends SherlockFragmentActivity {
 
 	private ViewPager mPager;
 	private Context mContext;
+	private SharedPreferences mSharedPreferences;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		/* Set exception handler... */
-		if(!BuildConfig.DEBUG)
+		if (!BuildConfig.DEBUG)
 			Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler());
 
 		/* Set layout... */
@@ -58,6 +63,7 @@ public class HomeActivity extends SherlockFragmentActivity {
 
 		/* Setting attributes... */
 		mContext = getApplicationContext();
+		mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
 		/* Create a viewpager and add two pages to it. */
 		mPager = (ViewPager) findViewById(R.id.pager);
@@ -65,11 +71,29 @@ public class HomeActivity extends SherlockFragmentActivity {
 		PagerHeader pagerHeader = (PagerHeader) findViewById(R.id.pager_header);
 		PagerAdapter pagerAdapter = new PagerAdapter(this, mPager, pagerHeader);
 
-		pagerAdapter.addPage(SelectWirelessNetworkFragment.class, R.string.page_label_networks_list);
+		pagerAdapter
+				.addPage(SelectWirelessNetworkFragment.class, R.string.page_label_networks_list);
 		pagerAdapter.addPage(ManualFragment.class, R.string.page_label_manual);
 
 		/* Show disclaimer... */
 		Toast.makeText(HomeActivity.this, R.string.toast_disclaimer_text, Toast.LENGTH_LONG).show();
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		String languageToLoad = mSharedPreferences.getString(
+				Preferences.PREFERENCES_LOCALECHOOSER_KEY,
+				Preferences.PREFERENCES_LOCALECHOOSER_DEFAULT);
+		// Checks if preference is defined
+		if (!("".equals(languageToLoad))) {
+			Locale locale = new Locale(languageToLoad);
+			Locale.setDefault(locale);
+			Configuration config = new Configuration();
+			config.locale = locale;
+			mContext.getResources().updateConfiguration(config,
+					mContext.getResources().getDisplayMetrics());
+		}
 	}
 
 	@Override
@@ -85,9 +109,12 @@ public class HomeActivity extends SherlockFragmentActivity {
 				/* Only applicable to HoneyComb & above. */
 				Intent shareIntent = new Intent(android.content.Intent.ACTION_SEND);
 				shareIntent.setType("text/plain");
-				shareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, getString(R.string.menu_share_subject));
-				shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, getString(R.string.menu_share_text));
-				startActivity(Intent.createChooser(shareIntent, getString(R.string.menu_share_title)));
+				shareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,
+						getString(R.string.menu_share_subject));
+				shareIntent.putExtra(android.content.Intent.EXTRA_TEXT,
+						getString(R.string.menu_share_text));
+				startActivity(Intent.createChooser(shareIntent,
+						getString(R.string.menu_share_title)));
 				break;
 			case R.id.menu_networks:
 				(new SupportedNetworksDialog(this)).show();
@@ -100,8 +127,8 @@ public class HomeActivity extends SherlockFragmentActivity {
 	}
 
 	/* PagerAdapter from SuperUser App, (c) 2011 Adam Shanks (ChainsDD) */
-	public static class PagerAdapter extends FragmentPagerAdapter implements ViewPager.OnPageChangeListener,
-			PagerHeader.OnHeaderClickListener {
+	public static class PagerAdapter extends FragmentPagerAdapter implements
+			ViewPager.OnPageChangeListener, PagerHeader.OnHeaderClickListener {
 
 		private final Context mContext;
 		private final ViewPager mPager;

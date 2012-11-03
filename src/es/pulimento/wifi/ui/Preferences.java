@@ -37,8 +37,6 @@ import es.pulimento.wifi.R;
 import es.pulimento.wifi.ui.utils.ExceptionHandler;
 import es.pulimento.wifi.ui.utils.UpdateChecker;
 
-
-
 public class Preferences extends SherlockPreferenceActivity {
 
 	/* Constants. */
@@ -48,11 +46,13 @@ public class Preferences extends SherlockPreferenceActivity {
 	public final static String PREFERENCES_AUTOUPDATE_KEY = "prefs_key_autoupdate";
 	public final static String PREFERENCES_VIBRATEUPDATE_KEY = "prefs_key_vibrateupdate";
 	public final static String PREFERENCES_UPDATEINTERVAL_KEY = "prefs_key_updateinterval";
+	public final static String PREFERENCES_LOCALECHOOSER_KEY = "prefs_key_localechooser";
 
 	/* Preference default values. */
 	public final static boolean PREFERENCES_AUTOUPDATE_DEFAULT = true;
 	public final static boolean PREFERENCES_VIBRATEUPDATE_DEFAULT = false;
 	public final static String PREFERENCES_UPDATEINTERVAL_DEFAULT = "2000";
+	public final static String PREFERENCES_LOCALECHOOSER_DEFAULT = "";
 
 	/* Preference */
 	private Preference mApkVersion = null;
@@ -79,7 +79,7 @@ public class Preferences extends SherlockPreferenceActivity {
 
 	@Override
 	public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
-		String pref = preference.getKey();
+		String pref = preference.getKey();		
 		if (pref.equals(getString(R.string.preferences_updater_key))) {
 			new UpdateChecker(this, null).work();
 			return true;

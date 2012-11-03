@@ -61,6 +61,8 @@
     <string name="preferences_about_summary">Acerca de esta versión</string>
     <string name="preferences_updater_summary">Buscar actualizaciones manualmente</string>
     <string name="preferences_updater_title">Actualizador</string>
+    <string name="preferences_localechooser_title">Seleccionar idioma</string>
+    <string name="preferences_localechooser_summary">Requiere reiniciar</string>
 
     <!-- Main activity -->
     <string name="mainactivity_failed_dialog_error">Error</string>

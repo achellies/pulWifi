@@ -15,7 +15,6 @@
             android:summary="@string/preferences_vibrateupdate_summary"
             android:title="@string/preferences_vibrateupdate_title"
             android:widgetLayout="@layout/checkbox_jb" />
-
         <ListPreference
             android:defaultValue="@string/preferences_updateinterval_default"
             android:entries="@array/preferences_updateintervals_names"
@@ -26,6 +25,13 @@
             android:widgetLayout="@layout/listpreference_jb" />
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/preferences_category_info" >
+        <ListPreference
+            android:defaultValue="@string/preferences_localechooser_default"
+            android:entries="@array/preferences_localechooser_names"
+            android:entryValues="@array/preferences_localechooser_values"
+            android:key="@string/preferences_localechooser_key"
+            android:summary="@string/preferences_localechooser_summary"
+            android:title="@string/preferences_localechooser_title" />
         <Preference
             android:key="@string/preferences_updater_key"
             android:summary="@string/preferences_updater_summary"

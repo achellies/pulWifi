@@ -55,6 +55,8 @@
     <string name="preferences_about_summary">Sobre este lanzamento</string>
     <string name="preferences_updater_summary">Comprobar se hai actualizacións manualmente</string>
     <string name="preferences_updater_title">Actualizar</string>
+    <string name="preferences_localechooser_title">Escolla o idioma</string>
+    <string name="preferences_localechooser_summary">É necesario reiniciar</string>
 
     <!-- Main activity -->
     <string name="mainactivity_failed_dialog_error">Error</string>

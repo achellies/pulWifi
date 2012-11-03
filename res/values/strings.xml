@@ -57,6 +57,8 @@
     <string name="preferences_updateinterval_default">2000</string>
     <string name="preferences_about_key">prefs_key_about</string>
     <string name="preferences_updater_key">prefs_key_manualupdate</string>
+    <string name="preferences_localechooser_key">prefs_key_localechooser</string>
+    <string name="preferences_localechooser_default"></string>
 
     <!-- Preferences -->
     <string name="preferences_category_scanmode">SCAN MODE</string>
@@ -74,6 +76,8 @@
     <string name="preferences_about_title">pulWifi %1$s (r%2$d)</string>
     <string name="preferences_updater_summary">Search for updates manually</string>
     <string name="preferences_updater_title">Updater</string>
+    <string name="preferences_localechooser_title">Choose language</string>
+    <string name="preferences_localechooser_summary">Restart required</string>
 
     <!-- Main activity -->
     <string name="mainactivity_failed_dialog_error">Error</string>

@@ -45,7 +45,7 @@
 
 
     <!-- Preferences -->
-    <string name="preferences_category_scanmode">"Rede de pesquisa"</string>
+    <string name="preferences_category_scanmode">"REDE DE PESQUISA"</string>
     <string name="preferences_autoupdate_title">"Atualizar automaticamente"</string>
     <string name="preferences_autoupdate_summary">"Atualizar lista de redes automaticamente"</string>
     <string name="preferences_vibrateupdate_title">"Vibrar com cada atualização"</string>
@@ -55,10 +55,12 @@
     <string name="preferences_updateinterval_fast">"Rápido"</string>
     <string name="preferences_updateinterval_normal">"Normal"</string>
     <string name="preferences_updateinterval_slow">"Devagar"</string>
-    <string name="preferences_category_info">"General.."</string>
+    <string name="preferences_category_info">"GENERAL"</string>
     <string name="preferences_about_summary">"Sobre este Lançamento"</string>
     <string name="preferences_updater_summary">Verificar se há atualizações manualmente</string>
     <string name="preferences_updater_title">Updater</string>
+    <string name="preferences_localechooser_title">Escolha o idioma</string>
+    <string name="preferences_localechooser_summary">É necessário reiniciar</string>
 
     <!-- Main activity -->
     <string name="mainactivity_failed_dialog_error">"Erro"</string>
