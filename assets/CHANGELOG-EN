@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <body>
+	<h3>- v2.0.3</h3>
+	<ul>
+		<li>Now can select app language manually</li>
+		<li>Added support for Eircom routers</li>
+		<li>Little changes in algorithms</li>		
+		<li>Fixed ordering in networks list</li>
+		<li>Layouts revised (especially for tablets)</li>
+		<li>Minor changes, bug fixes, updated libraries</li>
+		<li>Reduced APK size</li>
+	</ul>
 	<h3>- v2.0.2</h3>
 	<ul>
 		<li>Better error reporting</li>
