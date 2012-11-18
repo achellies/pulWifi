@@ -29,7 +29,6 @@ import es.pulimento.wifi.core.WirelessNetwork.WirelessEncryption;
  * Eircom algorithm published here:
  * http://www.bacik.org/eircomwep/howto.html
  * Taken from http://code.google.com/p/android-thomson-key-solver/source/browse/android/src/org/exobel/routerkeygen/algorithms/EircomKeygen.java
- * ------ CURRENTLY NOT WORKING, MUST REVIEW IT ------
  */
 public class EircomAlgorithm extends CrackAlgorithm {
 
@@ -58,7 +57,8 @@ public class EircomAlgorithm extends CrackAlgorithm {
 	 */
 	@Override
 	protected String crackAlgorithm(String essid_data, String bssid_data) {
-		String mac = bssid_data.substring(6);
+		// Remove separators, put in lowercase, get last three octals
+		String mac = bssid_data.replace(":", "").toLowerCase().substring(6);
 		try {
 			md = MessageDigest.getInstance("SHA1");
 		} catch (NoSuchAlgorithmException e1) {
@@ -89,6 +89,8 @@ public class EircomAlgorithm extends CrackAlgorithm {
 	public static boolean supportsEncryption(WirelessEncryption mCapabilities) {
 		return mCapabilities.equals(WirelessEncryption.WPA);
 	}
+	
+	// Utilities
 
 	public String dectoString(int mac) {
 		String ret = "";

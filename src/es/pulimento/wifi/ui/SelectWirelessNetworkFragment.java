@@ -168,10 +168,7 @@ public class SelectWirelessNetworkFragment extends ListFragment implements OnCli
 //				 mWirelessNetList.add(new WirelessNetwork("WLAN_E919", "64:68:0C:96:e9:1c", -100, "[WPA]??"));//dbcd970f0d705754206d
 //				 mWirelessNetList.add(new WirelessNetwork("HAWEI2", "00:22:A1:32:81:20", -100, "[WPA]??"));
 //				 mWirelessNetList.add(new WirelessNetwork("bazinga", "FF:FF:FF:FF:FF:FF", -100, "[WPA]??"));
-				 mWirelessNetList.add(new WirelessNetwork("eircom1234", "00:0F:CC:12:34:56", -100, "[WPA]"));
-				 mWirelessNetList.add(new WirelessNetwork("eircom1234", "00:0F:CC:12:34:56", -100, "[WPA]??"));
-				 mWirelessNetList.add(new WirelessNetwork("Eircom2633 7520", "00:0F:CC:12:34:56", -100, "[WPA]"));
-				 mWirelessNetList.add(new WirelessNetwork("1234", "00:0F:CC:12:34:56", -100, "[WPA]"));
+//				 mWirelessNetList.add(new WirelessNetwork("eircom2633 7520", "00:0F:CC:59:B0:9C", -100, "[WPA]")); //29b2e9560b3a83a187ec5f2057				 
 			}
 
 			// Refresh list...
@@ -197,7 +194,7 @@ class NetworkListAdapter implements ListAdapter {
 
 	private List<WirelessNetwork> mItems;
 	private Drawable mDrawLocked, mDrawUnlocked;
-	private Drawable mSignalLevel1, mSignalLevel2, mSignalLevel3, mSignalLevel4;
+	private Drawable mSignalLevel1, mSignalLevel2, mSignalLevel3, mSignalLevel4, mSignalLevel5;
 	private LayoutInflater mLayoutInflater;
 
 	public NetworkListAdapter(List<WirelessNetwork> items, Context mContext) {
@@ -206,12 +203,15 @@ class NetworkListAdapter implements ListAdapter {
 		mItems = new ArrayList<WirelessNetwork>();
 		mItems = items;
 		mLayoutInflater = (LayoutInflater) mContext.getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		mDrawLocked = res.getDrawable(R.drawable.ic_locked);
-		mDrawUnlocked = res.getDrawable(R.drawable.ic_unlocked);
-		mSignalLevel1 = res.getDrawable(R.drawable.ic_signal_1);
-		mSignalLevel2 = res.getDrawable(R.drawable.ic_signal_2);
-		mSignalLevel3 = res.getDrawable(R.drawable.ic_signal_3);
-		mSignalLevel4 = res.getDrawable(R.drawable.ic_signal_4);
+		
+		mDrawLocked = res.getDrawable(R.drawable.ic_locked_new);
+		mDrawUnlocked = res.getDrawable(R.drawable.ic_unlocked_new);
+		
+		mSignalLevel1 = res.getDrawable(R.drawable.ic_signal_new_1);
+		mSignalLevel2 = res.getDrawable(R.drawable.ic_signal_new_2);
+		mSignalLevel3 = res.getDrawable(R.drawable.ic_signal_new_3);
+		mSignalLevel4 = res.getDrawable(R.drawable.ic_signal_new_4);
+		mSignalLevel5 = res.getDrawable(R.drawable.ic_signal_new_5);
 	}
 
 	@Override
@@ -249,8 +249,8 @@ class NetworkListAdapter implements ListAdapter {
 
 			ImageView signal = (ImageView) convertView.findViewById(R.id.layout_selecwireless_listitem_strength);
 			if(signal != null) {
-				int signalLevel = WifiManager.calculateSignalLevel(item.getSignal(), 4);
-				signal.setImageDrawable((signalLevel == 0) ? mSignalLevel1 : (signalLevel == 1) ? mSignalLevel2 : (signalLevel == 2) ? mSignalLevel3 : mSignalLevel4);
+				int signalLevel = WifiManager.calculateSignalLevel(item.getSignal(), 5);
+				signal.setImageDrawable((signalLevel == 0) ? mSignalLevel1 : (signalLevel == 1) ? mSignalLevel2 : (signalLevel == 2) ? mSignalLevel3 : (signalLevel == 3) ? mSignalLevel4 : mSignalLevel5);
 			}
 
 			TextView capabilities = (TextView) convertView.findViewById(R.id.layout_selecwireless_listitem_security);

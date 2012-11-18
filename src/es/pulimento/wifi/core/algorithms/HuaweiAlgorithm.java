@@ -45,14 +45,14 @@ public class HuaweiAlgorithm extends CrackAlgorithm {
 		// Added all macs untill version 3 which will be focused on this.
 		addPattern("(.*)", "(F4:C7:14:[0-9A-Fa-f:]{8})");
 		// addPattern("", "(78:1D:BA:[0-9A-Fa-f:]{8})");// Confirmed, won't work
-		addPattern("(.*)", "(64:16:F0:[0-9A-Fa-f:]{8})");
+		addPattern("(.*)", "(64:16:F0:[0-9A-Fa-f:]{8})");// Confirmed as valid (Infinitum)
 		addPattern("(.*)", "(5C:4C:A9:[0-9A-Fa-f:]{8})");
 		addPattern("(.*)", "(54:A5:1B:[0-9A-Fa-f:]{8})");
 		addPattern("(.*)", "(54:89:98:[0-9A-Fa-f:]{8})");
 		addPattern("(.*)", "(4C:54:99:[0-9A-Fa-f:]{8})");
 		addPattern("(.*)", "(4C:1F:CC:[0-9A-Fa-f:]{8})");
 		addPattern("(.*)", "(40:4D:8E:[0-9A-Fa-f:]{8})");
-		addPattern("(.*)", "(30:87:30:[0-9A-Fa-f:]{8})");
+		//addPattern("(.*)", "(30:87:30:[0-9A-Fa-f:]{8})");// Confirmed, won't work
 		addPattern("(.*)", "(28:6E:D4:[0-9A-Fa-f:]{8})");
 		addPattern("(.*)", "(28:5F:DB:[0-9A-Fa-f:]{8})");
 		addPattern("(.*)", "(24:DB:AC:[0-9A-Fa-f:]{8})");
