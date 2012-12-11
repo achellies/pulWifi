@@ -59,7 +59,7 @@ public class HomeActivity extends SherlockFragmentActivity {
 			Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler());
 
 		/* Set layout... */
-		setContentView(R.layout.layout_homeactivity);
+		setContentView(R.layout.activity_home);
 
 		/* Setting attributes... */
 		mContext = getApplicationContext();

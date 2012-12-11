@@ -42,7 +42,7 @@ public class AboutActivity extends SherlockActivity implements OnClickListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.layout_about);
+		setContentView(R.layout.activity_about);
 
 		// Make links clickable
 		((TextView) findViewById(R.id.act_about_text)).setMovementMethod(LinkMovementMethod.getInstance());

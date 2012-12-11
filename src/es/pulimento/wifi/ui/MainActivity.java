@@ -19,6 +19,7 @@
 
 package es.pulimento.wifi.ui;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -51,7 +52,7 @@ public class MainActivity extends Activity {
 			Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler());
 
 		/* Set view content... */
-		setContentView(R.layout.layout_mainactivity);
+		setContentView(R.layout.activity_main);
 
 		/* Initialize variables... */
 		mActivity = this;
@@ -88,6 +89,7 @@ public class MainActivity extends Activity {
 	/*
 	 * Class that holds all event handling...
 	 */
+	@SuppressLint("HandlerLeak")
 	public class EventHandler extends Handler {
 		@Override
 		public void handleMessage(Message msg) {

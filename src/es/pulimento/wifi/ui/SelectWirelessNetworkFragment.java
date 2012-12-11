@@ -69,7 +69,7 @@ public class SelectWirelessNetworkFragment extends ListFragment implements OnCli
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		return inflater.inflate(R.layout.layout_selectwirelessnetworkfragment, container, false);
+		return inflater.inflate(R.layout.fragment_selectwirelessnetwork, container, false);
 	}
 
 	@Override
@@ -82,13 +82,16 @@ public class SelectWirelessNetworkFragment extends ListFragment implements OnCli
 		mWifiManager = (WifiManager) mActivity.getSystemService(Context.WIFI_SERVICE);
 		mVibrator = (Vibrator) mActivity.getSystemService(Context.VIBRATOR_SERVICE);
 		mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(mActivity);
-		mRefreshSection = (LinearLayout) mActivity.findViewById(R.id.layout_selectwireless_refresh_section);
+		mRefreshSection = (LinearLayout) mActivity
+				.findViewById(R.id.layout_selectwireless_refresh_section);
 		mTimer = new Timer();
 		mIntentFilter = new IntentFilter();
 		mIntentFilter.addAction(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION);
 		mBroadcastReceiver = new MBroadcastReceiver();
 
-		((Button) mActivity.findViewById(R.id.layout_selectwireless_refresh_button)).setOnClickListener(this);
+		// Set onClickListeners
+		((Button) mActivity.findViewById(R.id.layout_selectwireless_refresh_button))
+				.setOnClickListener(this);
 	}
 
 	@Override
@@ -98,7 +101,8 @@ public class SelectWirelessNetworkFragment extends ListFragment implements OnCli
 		// Register receivers...
 		mActivity.registerReceiver(mBroadcastReceiver, mIntentFilter);
 
-		if (mSharedPreferences.getBoolean(Preferences.PREFERENCES_AUTOUPDATE_KEY, Preferences.PREFERENCES_AUTOUPDATE_DEFAULT)) {
+		if (mSharedPreferences.getBoolean(Preferences.PREFERENCES_AUTOUPDATE_KEY,
+				Preferences.PREFERENCES_AUTOUPDATE_DEFAULT)) {
 			mRefreshSection.setVisibility(View.GONE);
 		} else {
 			mRefreshSection.setVisibility(View.VISIBLE);
@@ -125,7 +129,7 @@ public class SelectWirelessNetworkFragment extends ListFragment implements OnCli
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
 		WirelessNetwork w = (WirelessNetwork) this.getListAdapter().getItem(position);
-		if(w != null) {
+		if (w != null) {
 			if (w.isCrackeable()) {
 				w.crack();
 				Intent i = new Intent(mActivity, ShowPassActivity.class);
@@ -133,7 +137,8 @@ public class SelectWirelessNetworkFragment extends ListFragment implements OnCli
 				i.putExtra(ShowPassActivity.EXTRA_NETWORK, w);
 				startActivity(i);
 			} else
-				Toast.makeText(mActivity, getString(R.string.selectwireless_unsupported), Toast.LENGTH_SHORT).show();
+				Toast.makeText(mActivity, getString(R.string.selectwireless_unsupported),
+						Toast.LENGTH_SHORT).show();
 		}
 	}
 
@@ -154,31 +159,48 @@ public class SelectWirelessNetworkFragment extends ListFragment implements OnCli
 				mWirelessNetList.add(new WirelessNetwork(wifi));
 
 			// For testing networks...
-			if(BuildConfig.DEBUG)
-			{
-//				 mWirelessNetList.add(new WirelessNetwork("Andared", "AA:AA:AA:AA:AA:AA", 0, "[WPA]"));	// ALGO: Andared KEY: 6b629f4c299371737494c61b5a101693a2d4e9e1f3e1320f3ebf9ae379cecf32
-//				 mWirelessNetList.add(new WirelessNetwork("InfostradaWiFi-002560", "00:E0:4D:90:E1:E0", 0, "[WPA]"));	// ALGO: Infostrada KEY: 200E04D90E1E0
-//				 mWirelessNetList.add(new WirelessNetwork("Discus--DA1CC5", "00:1C:A2:DA:1C:C5", 0, "[WPA]"));
-//				 mWirelessNetList.add(new WirelessNetwork("WLAN_1234", "64:68:0c:AA:AA:AA", 0, "[WPA]"));
-//				 mWirelessNetList.add(new WirelessNetwork("DLink-AAAAAA", "64:68:0c:64:68:0c", 0, "[WPA]"));
-//				 mWirelessNetList.add(new WirelessNetwork("WLAN4DC866", "00:22:2D:04:DC:E8", -80, "[WPA]"));
-//				 mWirelessNetList.add(new WirelessNetwork("ThomsonF8A3D0", "AA:AA:AA:AA:AA:AA", -100, "[WEP??"));
-//				 mWirelessNetList.add(new WirelessNetwork("JAZZTEL_E919", "64:68:0C:DE:39:48", -100, "[WPA]??"));
-//				 mWirelessNetList.add(new WirelessNetwork("HAWEI1", "00:18:82:32:81:20", -100, "[WPA]??"));
-//				 mWirelessNetList.add(new WirelessNetwork("WLAN_E919", "64:68:0C:96:e9:1c", -100, "[WPA]??"));//dbcd970f0d705754206d
-//				 mWirelessNetList.add(new WirelessNetwork("HAWEI2", "00:22:A1:32:81:20", -100, "[WPA]??"));
-//				 mWirelessNetList.add(new WirelessNetwork("bazinga", "FF:FF:FF:FF:FF:FF", -100, "[WPA]??"));
-//				 mWirelessNetList.add(new WirelessNetwork("eircom2633 7520", "00:0F:CC:59:B0:9C", -100, "[WPA]")); //29b2e9560b3a83a187ec5f2057				 
+			if (BuildConfig.DEBUG) {
+				// mWirelessNetList.add(new WirelessNetwork("Andared", "AA:AA:AA:AA:AA:AA", 0,
+				// "[WPA]")); // ALGO: Andared KEY:
+				// 6b629f4c299371737494c61b5a101693a2d4e9e1f3e1320f3ebf9ae379cecf32
+				// mWirelessNetList.add(new WirelessNetwork("InfostradaWiFi-002560",
+				// "00:E0:4D:90:E1:E0", 0, "[WPA]")); // ALGO: Infostrada KEY: 200E04D90E1E0
+				// mWirelessNetList.add(new WirelessNetwork("Discus--DA1CC5", "00:1C:A2:DA:1C:C5",
+				// 0, "[WPA]"));
+				// mWirelessNetList.add(new WirelessNetwork("WLAN_1234", "64:68:0c:AA:AA:AA", 0,
+				// "[WPA]"));
+				// mWirelessNetList.add(new WirelessNetwork("DLink-AAAAAA", "64:68:0c:64:68:0c", 0,
+				// "[WPA]"));
+				// mWirelessNetList.add(new WirelessNetwork("WLAN4DC866", "00:22:2D:04:DC:E8", -80,
+				// "[WPA]"));
+				// mWirelessNetList.add(new WirelessNetwork("ThomsonF8A3D0", "AA:AA:AA:AA:AA:AA",
+				// -100, "[WEP??"));
+				// mWirelessNetList.add(new WirelessNetwork("JAZZTEL_E919", "64:68:0C:DE:39:48",
+				// -100, "[WPA]??"));
+				// mWirelessNetList.add(new WirelessNetwork("HAWEI1", "00:18:82:32:81:20", -100,
+				// "[WPA]??"));
+				// mWirelessNetList.add(new WirelessNetwork("WLAN_E919", "64:68:0C:96:e9:1c", -100,
+				// "[WPA]??"));//dbcd970f0d705754206d
+				// mWirelessNetList.add(new WirelessNetwork("HAWEI2", "00:22:A1:32:81:20", -100,
+				// "[WPA]??"));
+				// mWirelessNetList.add(new WirelessNetwork("bazinga", "FF:FF:FF:FF:FF:FF", -100,
+				// "[WPA]??"));
+				// mWirelessNetList.add(new WirelessNetwork("eircom2633 7520", "00:0F:CC:59:B0:9C",
+				// -100, "[WPA]")); //29b2e9560b3a83a187ec5f2057
 			}
 
 			// Refresh list...
 			getListView().invalidateViews();
 
-			if(mSharedPreferences.getBoolean(Preferences.PREFERENCES_VIBRATEUPDATE_KEY, Preferences.PREFERENCES_VIBRATEUPDATE_DEFAULT))
+			if (mSharedPreferences.getBoolean(Preferences.PREFERENCES_VIBRATEUPDATE_KEY,
+					Preferences.PREFERENCES_VIBRATEUPDATE_DEFAULT))
 				mVibrator.vibrate(150);
 
-			if(mSharedPreferences.getBoolean(Preferences.PREFERENCES_AUTOUPDATE_KEY, Preferences.PREFERENCES_AUTOUPDATE_DEFAULT))
-				mTimer.schedule(new ScanTask(), Integer.parseInt(mSharedPreferences.getString(Preferences.PREFERENCES_UPDATEINTERVAL_KEY, Preferences.PREFERENCES_UPDATEINTERVAL_DEFAULT)));
+			if (mSharedPreferences.getBoolean(Preferences.PREFERENCES_AUTOUPDATE_KEY,
+					Preferences.PREFERENCES_AUTOUPDATE_DEFAULT))
+				mTimer.schedule(new ScanTask(), Integer.parseInt(mSharedPreferences.getString(
+						Preferences.PREFERENCES_UPDATEINTERVAL_KEY,
+						Preferences.PREFERENCES_UPDATEINTERVAL_DEFAULT)));
 		}
 
 		class ScanTask extends TimerTask {
@@ -202,11 +224,12 @@ class NetworkListAdapter implements ListAdapter {
 		Resources res = mContext.getResources();
 		mItems = new ArrayList<WirelessNetwork>();
 		mItems = items;
-		mLayoutInflater = (LayoutInflater) mContext.getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		
+		mLayoutInflater = (LayoutInflater) mContext.getApplicationContext().getSystemService(
+				Context.LAYOUT_INFLATER_SERVICE);
+
 		mDrawLocked = res.getDrawable(R.drawable.ic_locked_new);
 		mDrawUnlocked = res.getDrawable(R.drawable.ic_unlocked_new);
-		
+
 		mSignalLevel1 = res.getDrawable(R.drawable.ic_signal_new_1);
 		mSignalLevel2 = res.getDrawable(R.drawable.ic_signal_new_2);
 		mSignalLevel3 = res.getDrawable(R.drawable.ic_signal_new_3);
@@ -230,31 +253,39 @@ class NetworkListAdapter implements ListAdapter {
 		/* Sort items before showing them. */
 		Collections.sort(mItems);
 
-		if(convertView == null)
+		if (convertView == null)
 			convertView = mLayoutInflater.inflate(R.layout.layout_selectwireless_listitem, null);
 
 		WirelessNetwork item = mItems.get(position);
-		if(item != null) {
-			TextView crackeable = (TextView) convertView.findViewById(R.id.layout_selecwireless_listitem_crackeable);
-			if(crackeable != null)
-				crackeable.setBackgroundDrawable((item.isCrackeable()) ? mDrawUnlocked : mDrawLocked);
+		if (item != null) {
+			TextView crackeable = (TextView) convertView
+					.findViewById(R.id.layout_selecwireless_listitem_crackeable);
+			if (crackeable != null)
+				crackeable.setBackgroundDrawable((item.isCrackeable()) ? mDrawUnlocked
+						: mDrawLocked);
 
-			TextView essid = (TextView) convertView.findViewById(R.id.layout_selecwireless_listitem_essid);
-			if(essid != null)
+			TextView essid = (TextView) convertView
+					.findViewById(R.id.layout_selecwireless_listitem_essid);
+			if (essid != null)
 				essid.setText(item.getEssid());
 
-			TextView bssid = (TextView) convertView.findViewById(R.id.layout_selecwireless_listitem_bssid);
-			if(bssid != null)
+			TextView bssid = (TextView) convertView
+					.findViewById(R.id.layout_selecwireless_listitem_bssid);
+			if (bssid != null)
 				bssid.setText(item.getBssid());
 
-			ImageView signal = (ImageView) convertView.findViewById(R.id.layout_selecwireless_listitem_strength);
-			if(signal != null) {
+			ImageView signal = (ImageView) convertView
+					.findViewById(R.id.layout_selecwireless_listitem_strength);
+			if (signal != null) {
 				int signalLevel = WifiManager.calculateSignalLevel(item.getSignal(), 5);
-				signal.setImageDrawable((signalLevel == 0) ? mSignalLevel1 : (signalLevel == 1) ? mSignalLevel2 : (signalLevel == 2) ? mSignalLevel3 : (signalLevel == 3) ? mSignalLevel4 : mSignalLevel5);
+				signal.setImageDrawable((signalLevel == 0) ? mSignalLevel1
+						: (signalLevel == 1) ? mSignalLevel2 : (signalLevel == 2) ? mSignalLevel3
+								: (signalLevel == 3) ? mSignalLevel4 : mSignalLevel5);
 			}
 
-			TextView capabilities = (TextView) convertView.findViewById(R.id.layout_selecwireless_listitem_security);
-			if(capabilities != null)
+			TextView capabilities = (TextView) convertView
+					.findViewById(R.id.layout_selecwireless_listitem_security);
+			if (capabilities != null)
 				capabilities.setText(item.getCapabilities().toStringId());
 		}
 		return convertView;
