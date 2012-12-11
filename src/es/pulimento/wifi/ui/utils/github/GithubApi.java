@@ -36,11 +36,11 @@ public class GithubApi {
 
 	public Download getLastDownload() {
 		try {
-			URL url = new URL(BASEURL+"downloads");
+			URL url = new URL(BASEURL + "downloads");
 			BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
 			StringBuilder sb = new StringBuilder();
 			String s;
-			while ((s = in.readLine()) != null)
+			while((s = in.readLine()) != null)
 				sb.append(s);
 			in.close();
 			return new Download((new JSONArray(sb.toString())).getJSONObject(0));
@@ -62,11 +62,11 @@ public class GithubApi {
 
 		// Get the list of issues...
 		try {
-			URL url = new URL(BASEURL+"issues");
+			URL url = new URL(BASEURL + "issues");
 			BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
 			StringBuilder sb = new StringBuilder();
 			String s;
-			while ((s = in.readLine()) != null)
+			while((s = in.readLine()) != null)
 				sb.append(s);
 			in.close();
 			JSONArray a = new JSONArray(sb.toString());
@@ -95,8 +95,8 @@ public class GithubApi {
 		if(getIssues().contains(i))
 			return;
 
-		HttpPost httpPost = new HttpPost(BASEURL+"issues");
-		httpPost.setHeader("Authorization", "token "+mToken);
+		HttpPost httpPost = new HttpPost(BASEURL + "issues");
+		httpPost.setHeader("Authorization", "token " + mToken);
 		httpPost.setHeader("Content-Type", "application/json");
 		try {
 			httpPost.setEntity(new StringEntity(i.toJSONString(), "UTF-8"));

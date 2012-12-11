@@ -40,6 +40,7 @@ public class ThirdPartyLicensesDialog extends Dialog {
 		this.setContentView(R.layout.dialog_generic);
 		this.setTitle(R.string.dialog_about_open_source_licenses);
 
-		((WebView) findViewById(R.id.dialog_generic_webview)).loadUrl(mContext.getString(R.string.dialog_about_open_source_licenses_url));
+		((WebView) findViewById(R.id.dialog_generic_webview)).loadUrl(mContext
+				.getString(R.string.dialog_about_open_source_licenses_url));
 	}
 }

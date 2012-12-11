@@ -38,10 +38,10 @@ public class ShowPasswordsDialog extends Dialog {
 
 		mTextView = (TextView) findViewById(R.id.dialog_showpasswords_list);
 
-		for (String p : passwords)
+		for(String p : passwords)
 			mTextView.append(p + "\n");
 
-		if (passwords.size() == 1)
+		if(passwords.size() == 1)
 			this.setTitle(R.string.dialog_showpass_title_one);
 		else
 			this.setTitle(R.string.dialog_showpass_title_many);

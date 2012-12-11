@@ -43,21 +43,23 @@ public class EnableWifiDialog extends AlertDialog implements OnClickListener {
 		this.setCancelable(false);
 		this.setTitle(R.string.mainactivity_ask_dialog_title);
 		this.setMessage(context.getText(R.string.mainactivity_ask_dialog_msg));
-		this.setButton(BUTTON_POSITIVE, context.getText(R.string.mainactivity_ask_dialog_yes_button), this);
-		this.setButton(BUTTON_NEGATIVE, context.getText(R.string.mainactivity_ask_dialog_no_button), this);
+		this.setButton(BUTTON_POSITIVE,
+				context.getText(R.string.mainactivity_ask_dialog_yes_button), this);
+		this.setButton(BUTTON_NEGATIVE,
+				context.getText(R.string.mainactivity_ask_dialog_no_button), this);
 	}
 
 	@Override
 	public void onClick(DialogInterface dialog, int which) {
 		this.dismiss();
 		switch(which) {
-		case BUTTON_POSITIVE:
-			if(!mWifiManager.setWifiEnabled(true))
-				new FailedDialog(mContext, mActivity);
-			break;
-		case BUTTON_NEGATIVE:
-			mActivity.get().finish();
-			break;
+			case BUTTON_POSITIVE:
+				if(!mWifiManager.setWifiEnabled(true))
+					new FailedDialog(mContext, mActivity);
+				break;
+			case BUTTON_NEGATIVE:
+				mActivity.get().finish();
+				break;
 		}
 	}
 }

@@ -57,7 +57,8 @@ public class ClipboardCopyDialog extends Dialog implements OnItemClickListener {
 		mListView = (ListView) findViewById(R.id.dialog_withlistview_list);
 
 		// Set adapters...
-		mListView.setAdapter(new ArrayAdapter<String>(mContext, android.R.layout.simple_list_item_1, mPasswords));
+		mListView.setAdapter(new ArrayAdapter<String>(mContext,
+				android.R.layout.simple_list_item_1, mPasswords));
 
 		// Listeners...
 		mListView.setOnItemClickListener(this);
@@ -67,7 +68,9 @@ public class ClipboardCopyDialog extends Dialog implements OnItemClickListener {
 	public void onItemClick(AdapterView<?> parent, View view, int pos, long id) {
 		String key = ((TextView) view).getText().toString();
 		mClipboardManager.setText(key);
-		Toast.makeText(mContext, mContext.getString(R.string.showpass_toclipboard) + " (" + key + ")", Toast.LENGTH_LONG).show();
+		Toast.makeText(mContext,
+				mContext.getString(R.string.showpass_toclipboard) + " (" + key + ")",
+				Toast.LENGTH_LONG).show();
 		Intent i = new Intent(Settings.ACTION_WIFI_SETTINGS);
 		i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		mContext.startActivity(i);

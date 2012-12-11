@@ -52,12 +52,12 @@ public class UpdateDialog extends AlertDialog implements OnClickListener {
 	public void onClick(DialogInterface dialog, int which) {
 		this.dismiss();
 		switch(which) {
-		case BUTTON_POSITIVE:
-			mContext.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(mUri)));
-			break;
-		case BUTTON_NEGATIVE:
-			this.dismiss();
-			break;
+			case BUTTON_POSITIVE:
+				mContext.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(mUri)));
+				break;
+			case BUTTON_NEGATIVE:
+				this.dismiss();
+				break;
 		}
 		mHandler.sendEmptyMessage(0);
 	}

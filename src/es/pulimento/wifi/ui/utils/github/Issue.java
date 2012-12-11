@@ -59,17 +59,8 @@ public class Issue {
 
 	public String toJSONString() {
 		try {
-			return
-				new JSONStringer()
-					.object()
-						.key("title")
-						.value(mTitle)
-						.key("body")
-						.value(mBody)
-						.key("labels")
-						.value(mLabels)
-					.endObject()
-				.toString();
+			return new JSONStringer().object().key("title").value(mTitle).key("body").value(mBody)
+					.key("labels").value(mLabels).endObject().toString();
 		} catch (JSONException e) {
 			// Should not happen...
 		}

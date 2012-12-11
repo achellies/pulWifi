@@ -79,12 +79,12 @@ public class Preferences extends SherlockPreferenceActivity {
 
 	@Override
 	public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
-		String pref = preference.getKey();		
-		if (pref.equals(getString(R.string.preferences_updater_key))) {
+		String pref = preference.getKey();
+		if(pref.equals(getString(R.string.preferences_updater_key))) {
 			new UpdateChecker(this, null).work();
 			return true;
 		}
-		if (pref.equals(getString(R.string.preferences_about_key))) {
+		if(pref.equals(getString(R.string.preferences_about_key))) {
 			Intent intent = new Intent(Preferences.this, AboutActivity.class);
 			intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
 			startActivity(intent);
@@ -100,7 +100,8 @@ public class Preferences extends SherlockPreferenceActivity {
 		@Override
 		protected Integer doInBackground(Void... params) {
 			try {
-				PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_META_DATA);
+				PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(),
+						PackageManager.GET_META_DATA);
 				apkVersion = pInfo.versionName;
 				apkVersionCode = pInfo.versionCode;
 			} catch (NameNotFoundException e) {
@@ -111,10 +112,11 @@ public class Preferences extends SherlockPreferenceActivity {
 
 		@Override
 		protected void onPostExecute(Integer result) {
-			mApkVersion.setTitle(getString(R.string.preferences_about_title, apkVersion, apkVersionCode));
+			mApkVersion.setTitle(getString(R.string.preferences_about_title, apkVersion,
+					apkVersionCode));
 		}
 	}
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getSupportMenuInflater().inflate(R.menu.menu_preferences, menu);
@@ -123,7 +125,7 @@ public class Preferences extends SherlockPreferenceActivity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
+		switch(item.getItemId()) {
 			case R.id.menu_preferences_back:
 				this.finish();
 				break;

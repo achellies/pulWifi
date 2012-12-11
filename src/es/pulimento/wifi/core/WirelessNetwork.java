@@ -176,7 +176,7 @@ public class WirelessNetwork implements Parcelable, Comparable<WirelessNetwork> 
 		boolean c[] = new boolean[1];
 		in.readBooleanArray(c);
 		mCrackeable = c[0];
-		if (mPasswords == null)
+		if(mPasswords == null)
 			mPasswords = new ArrayList<String>();
 		in.readStringList(mPasswords);
 		mSignal = in.readInt();
@@ -291,11 +291,11 @@ public class WirelessNetwork implements Parcelable, Comparable<WirelessNetwork> 
 	public int compareTo(WirelessNetwork w0) {
 		if(this.isCrackeable() == w0.isCrackeable())
 			return w0.getSignal() - this.getSignal();
-		else{
+		else {
 			if(this.isCrackeable() && !w0.isCrackeable())
 				return -1;
 			else
-				return 1;				
+				return 1;
 		}
 	}
 
@@ -304,6 +304,7 @@ public class WirelessNetwork implements Parcelable, Comparable<WirelessNetwork> 
 	 */
 	@Override
 	public String toString() {
-		return "WirelessNetwork [mEssid=" + mEssid + ", mBssid=" + mBssid + ", mCapabilities=" + mCapabilities + ", mCrackeable=" + mCrackeable + "]";
+		return "WirelessNetwork [mEssid=" + mEssid + ", mBssid=" + mBssid + ", mCapabilities="
+				+ mCapabilities + ", mCrackeable=" + mCrackeable + "]";
 	}
 }

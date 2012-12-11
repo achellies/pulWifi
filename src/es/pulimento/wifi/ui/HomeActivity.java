@@ -55,7 +55,7 @@ public class HomeActivity extends SherlockFragmentActivity {
 		super.onCreate(savedInstanceState);
 
 		/* Set exception handler... */
-		if (!BuildConfig.DEBUG)
+		if(!BuildConfig.DEBUG)
 			Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler());
 
 		/* Set layout... */
@@ -86,7 +86,7 @@ public class HomeActivity extends SherlockFragmentActivity {
 				Preferences.PREFERENCES_LOCALECHOOSER_KEY,
 				Preferences.PREFERENCES_LOCALECHOOSER_DEFAULT);
 		// Checks if preference is defined
-		if (!("".equals(languageToLoad))) {
+		if(!("".equals(languageToLoad))) {
 			Locale locale = new Locale(languageToLoad);
 			Locale.setDefault(locale);
 			Configuration config = new Configuration();
@@ -104,7 +104,7 @@ public class HomeActivity extends SherlockFragmentActivity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
+		switch(item.getItemId()) {
 			case R.id.menu_share:
 				/* Only applicable to HoneyComb & above. */
 				Intent shareIntent = new Intent(android.content.Intent.ACTION_SEND);

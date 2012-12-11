@@ -63,7 +63,6 @@ public class MainActivity extends Activity {
 		mUpdateChecker = new UpdateChecker(mActivity, mHandler);
 	}
 
-
 	@Override
 	public void onResume() {
 		super.onResume();
@@ -95,15 +94,16 @@ public class MainActivity extends Activity {
 		public void handleMessage(Message msg) {
 			super.handleMessage(msg);
 			switch(msg.what) {
-			case WifiEnabler.MSG_WIFI_ENABLED:
-				mWifiDone = true;
-				break;
-			case UpdateChecker.MSG_UPDATE_DONE:
-				mUpdatesDone = true;
+				case WifiEnabler.MSG_WIFI_ENABLED:
+					mWifiDone = true;
+					break;
+				case UpdateChecker.MSG_UPDATE_DONE:
+					mUpdatesDone = true;
 			}
 
 			if(mWifiDone && mUpdatesDone) {
-				mActivity.startActivity(new Intent(mActivity, HomeActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+				mActivity.startActivity(new Intent(mActivity, HomeActivity.class)
+						.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
 				mActivity.finish();
 			}
 		}

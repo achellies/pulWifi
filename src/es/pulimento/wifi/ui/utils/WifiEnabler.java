@@ -62,24 +62,24 @@ public class WifiEnabler extends BroadcastReceiver {
 		mIntentFilter.addAction(WifiManager.WIFI_STATE_CHANGED_ACTION);
 		mWifiManager = (WifiManager) mActivity.getSystemService(Context.WIFI_SERVICE);
 		mFailedDialog = new FailedDialog(mActivity, new WeakReference<Activity>(mActivity));
-		mEnableWifiDialog = new EnableWifiDialog(mActivity, new WeakReference<Activity>(mActivity));		
+		mEnableWifiDialog = new EnableWifiDialog(mActivity, new WeakReference<Activity>(mActivity));
 	}
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
-		switch (intent.getIntExtra(WifiManager.EXTRA_WIFI_STATE, -1)) {
-		case WifiManager.WIFI_STATE_UNKNOWN:
-			if(BuildConfig.DEBUG)
+		switch(intent.getIntExtra(WifiManager.EXTRA_WIFI_STATE, -1)) {
+			case WifiManager.WIFI_STATE_UNKNOWN:
+				if(BuildConfig.DEBUG)
+					mHandler.sendEmptyMessage(MSG_WIFI_ENABLED);
+				else
+					mFailedDialog.show();
+				break;
+			case WifiManager.WIFI_STATE_ENABLED:
 				mHandler.sendEmptyMessage(MSG_WIFI_ENABLED);
-			else
-				mFailedDialog.show();
-			break;
-		case WifiManager.WIFI_STATE_ENABLED:
-			mHandler.sendEmptyMessage(MSG_WIFI_ENABLED);
-			break;
-		case WifiManager.WIFI_STATE_DISABLED:
-			mEnableWifiDialog.show();
-			break;
+				break;
+			case WifiManager.WIFI_STATE_DISABLED:
+				mEnableWifiDialog.show();
+				break;
 		}
 	}
 
@@ -92,7 +92,7 @@ public class WifiEnabler extends BroadcastReceiver {
 		/*
 		 * Is wifi enabled? If not ask for it...
 		 */
-		if (mWifiManager.getWifiState() != WifiManager.WIFI_STATE_ENABLED)
+		if(mWifiManager.getWifiState() != WifiManager.WIFI_STATE_ENABLED)
 			mEnableWifiDialog.show();
 	}
 

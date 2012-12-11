@@ -47,7 +47,8 @@ public class ManualFragment extends Fragment implements OnClickListener {
 		mEditTextEssid = (EditText) inflatedView.findViewById(R.id.layout_manualcrack_essid);
 		mEditTextBssid = (EditText) inflatedView.findViewById(R.id.layout_manualcrack_bssid);
 		mButtonAccept = (Button) inflatedView.findViewById(R.id.layout_manualcrack_accept);
-		mToggleButton = (ToggleButton) inflatedView.findViewById(R.id.layout_manualcrack_togglebutton);
+		mToggleButton = (ToggleButton) inflatedView
+				.findViewById(R.id.layout_manualcrack_togglebutton);
 		return inflatedView;
 	}
 
@@ -60,10 +61,13 @@ public class ManualFragment extends Fragment implements OnClickListener {
 
 	@Override
 	public void onClick(View v) {
-		String capabilities = (String) (mToggleButton.isChecked() ? mToggleButton.getTextOn() : mToggleButton.getTextOff());
-		WirelessNetwork mWirelessNetwork = new WirelessNetwork(mEditTextEssid.getText().toString(), mEditTextBssid.getText().toString(), 1, capabilities);
-		if (!mWirelessNetwork.isCrackeable()) {
-			Toast.makeText(getActivity().getApplicationContext(), R.string.manualcrack_inputerror, Toast.LENGTH_LONG).show();
+		String capabilities = (String) (mToggleButton.isChecked() ? mToggleButton.getTextOn()
+				: mToggleButton.getTextOff());
+		WirelessNetwork mWirelessNetwork = new WirelessNetwork(mEditTextEssid.getText().toString(),
+				mEditTextBssid.getText().toString(), 1, capabilities);
+		if(!mWirelessNetwork.isCrackeable()) {
+			Toast.makeText(getActivity().getApplicationContext(), R.string.manualcrack_inputerror,
+					Toast.LENGTH_LONG).show();
 			return;
 		}
 		mWirelessNetwork.crack();

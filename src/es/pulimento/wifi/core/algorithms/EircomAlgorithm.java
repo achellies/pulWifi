@@ -66,7 +66,7 @@ public class EircomAlgorithm extends CrackAlgorithm {
 		}
 		byte[] routerMAC = new byte[4];
 		routerMAC[0] = 1;
-		for (int i = 0; i < 6; i += 2)
+		for(int i = 0; i < 6; i += 2)
 			routerMAC[i / 2 + 1] = (byte) ((Character.digit(mac.charAt(i), 16) << 4) + Character
 					.digit(mac.charAt(i + 1), 16));
 		int macDec = ((0xFF & routerMAC[0]) << 24) | ((0xFF & routerMAC[1]) << 16)
@@ -89,13 +89,13 @@ public class EircomAlgorithm extends CrackAlgorithm {
 	public static boolean supportsEncryption(WirelessEncryption mCapabilities) {
 		return mCapabilities.equals(WirelessEncryption.WPA);
 	}
-	
+
 	// Utilities
 
 	public String dectoString(int mac) {
 		String ret = "";
-		while (mac > 0) {
-			switch (mac % 10) {
+		while(mac > 0) {
+			switch(mac % 10) {
 				case 0:
 					ret = "Zero" + ret;
 					break;
@@ -140,7 +140,7 @@ public class EircomAlgorithm extends CrackAlgorithm {
 		byte[] hex = new byte[2 * raw.length];
 		int index = 0;
 
-		for (byte b : raw) {
+		for(byte b : raw) {
 			int v = b & 0xFF;
 			hex[index++] = HEX_CHAR_TABLE[v >>> 4];
 			hex[index++] = HEX_CHAR_TABLE[v & 0xF];

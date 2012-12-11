@@ -101,7 +101,7 @@ public class SelectWirelessNetworkFragment extends ListFragment implements OnCli
 		// Register receivers...
 		mActivity.registerReceiver(mBroadcastReceiver, mIntentFilter);
 
-		if (mSharedPreferences.getBoolean(Preferences.PREFERENCES_AUTOUPDATE_KEY,
+		if(mSharedPreferences.getBoolean(Preferences.PREFERENCES_AUTOUPDATE_KEY,
 				Preferences.PREFERENCES_AUTOUPDATE_DEFAULT)) {
 			mRefreshSection.setVisibility(View.GONE);
 		} else {
@@ -129,8 +129,8 @@ public class SelectWirelessNetworkFragment extends ListFragment implements OnCli
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
 		WirelessNetwork w = (WirelessNetwork) this.getListAdapter().getItem(position);
-		if (w != null) {
-			if (w.isCrackeable()) {
+		if(w != null) {
+			if(w.isCrackeable()) {
 				w.crack();
 				Intent i = new Intent(mActivity, ShowPassActivity.class);
 				i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -155,11 +155,11 @@ public class SelectWirelessNetworkFragment extends ListFragment implements OnCli
 		public void run() {
 			mWirelessNetList.clear();
 
-			for (ScanResult wifi : mWifiManager.getScanResults())
+			for(ScanResult wifi : mWifiManager.getScanResults())
 				mWirelessNetList.add(new WirelessNetwork(wifi));
 
 			// For testing networks...
-			if (BuildConfig.DEBUG) {
+			if(BuildConfig.DEBUG) {
 				// mWirelessNetList.add(new WirelessNetwork("Andared", "AA:AA:AA:AA:AA:AA", 0,
 				// "[WPA]")); // ALGO: Andared KEY:
 				// 6b629f4c299371737494c61b5a101693a2d4e9e1f3e1320f3ebf9ae379cecf32
@@ -192,11 +192,11 @@ public class SelectWirelessNetworkFragment extends ListFragment implements OnCli
 			// Refresh list...
 			getListView().invalidateViews();
 
-			if (mSharedPreferences.getBoolean(Preferences.PREFERENCES_VIBRATEUPDATE_KEY,
+			if(mSharedPreferences.getBoolean(Preferences.PREFERENCES_VIBRATEUPDATE_KEY,
 					Preferences.PREFERENCES_VIBRATEUPDATE_DEFAULT))
 				mVibrator.vibrate(150);
 
-			if (mSharedPreferences.getBoolean(Preferences.PREFERENCES_AUTOUPDATE_KEY,
+			if(mSharedPreferences.getBoolean(Preferences.PREFERENCES_AUTOUPDATE_KEY,
 					Preferences.PREFERENCES_AUTOUPDATE_DEFAULT))
 				mTimer.schedule(new ScanTask(), Integer.parseInt(mSharedPreferences.getString(
 						Preferences.PREFERENCES_UPDATEINTERVAL_KEY,
@@ -253,30 +253,30 @@ class NetworkListAdapter implements ListAdapter {
 		/* Sort items before showing them. */
 		Collections.sort(mItems);
 
-		if (convertView == null)
+		if(convertView == null)
 			convertView = mLayoutInflater.inflate(R.layout.layout_selectwireless_listitem, null);
 
 		WirelessNetwork item = mItems.get(position);
-		if (item != null) {
+		if(item != null) {
 			TextView crackeable = (TextView) convertView
 					.findViewById(R.id.layout_selecwireless_listitem_crackeable);
-			if (crackeable != null)
+			if(crackeable != null)
 				crackeable.setBackgroundDrawable((item.isCrackeable()) ? mDrawUnlocked
 						: mDrawLocked);
 
 			TextView essid = (TextView) convertView
 					.findViewById(R.id.layout_selecwireless_listitem_essid);
-			if (essid != null)
+			if(essid != null)
 				essid.setText(item.getEssid());
 
 			TextView bssid = (TextView) convertView
 					.findViewById(R.id.layout_selecwireless_listitem_bssid);
-			if (bssid != null)
+			if(bssid != null)
 				bssid.setText(item.getBssid());
 
 			ImageView signal = (ImageView) convertView
 					.findViewById(R.id.layout_selecwireless_listitem_strength);
-			if (signal != null) {
+			if(signal != null) {
 				int signalLevel = WifiManager.calculateSignalLevel(item.getSignal(), 5);
 				signal.setImageDrawable((signalLevel == 0) ? mSignalLevel1
 						: (signalLevel == 1) ? mSignalLevel2 : (signalLevel == 2) ? mSignalLevel3
@@ -285,7 +285,7 @@ class NetworkListAdapter implements ListAdapter {
 
 			TextView capabilities = (TextView) convertView
 					.findViewById(R.id.layout_selecwireless_listitem_security);
-			if (capabilities != null)
+			if(capabilities != null)
 				capabilities.setText(item.getCapabilities().toStringId());
 		}
 		return convertView;

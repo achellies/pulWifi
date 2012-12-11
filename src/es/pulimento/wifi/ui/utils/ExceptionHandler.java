@@ -27,7 +27,7 @@ public class ExceptionHandler implements UncaughtExceptionHandler {
 
 	@Override
 	public void uncaughtException(Thread t, Throwable e) {
-		Log.e("pulWifi","Uncaught exception!! Reporting...");
+		Log.e("pulWifi", "Uncaught exception!! Reporting...");
 		String version = Resources.getSystem().getString(R.string.app_version);
 		Issue i = new Issue("Exception in " + getFileName(e), "APP VERSION: " + version
 				+ "\nTRACE:\n" + getStackTrace(e) + "\n\nCAUSE TRACE:\n"
@@ -37,16 +37,16 @@ public class ExceptionHandler implements UncaughtExceptionHandler {
 
 	public String getFileName(Throwable e) {
 		// Sometimes stack trace are null in passed exception, why??
-		if (e.getStackTrace() != null) {
-			for (StackTraceElement s : e.getStackTrace())
-				if (PACKAGE.equals(s.getClassName().substring(0, PACKAGE.length())))
+		if(e.getStackTrace() != null) {
+			for(StackTraceElement s : e.getStackTrace())
+				if(PACKAGE.equals(s.getClassName().substring(0, PACKAGE.length())))
 					return s.getClassName().substring(s.getClassName().lastIndexOf('.') + 1);
 		}
 		return "<Unknown>";
 	}
 
 	public String getStackTrace(Throwable t) {
-		if (t != null) {
+		if(t != null) {
 			StringWriter sw = new StringWriter();
 			PrintWriter pw = new PrintWriter(sw, true);
 			t.printStackTrace(pw);

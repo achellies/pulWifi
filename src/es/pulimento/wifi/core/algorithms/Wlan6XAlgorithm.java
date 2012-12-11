@@ -79,16 +79,20 @@ public class Wlan6XAlgorithm extends CrackAlgorithm {
 		ssidSubPart[5] = ssidStr.charAt(5);
 		bssidLastByte[0] = macStr.charAt(15);
 		bssidLastByte[1] = macStr.charAt(16);
-		for (int k = 0; k < 6; ++k)
-			if (ssidSubPart[k] >= 'A') ssidSubPart[k] = (char) (ssidSubPart[k] - 55);
+		for(int k = 0; k < 6; ++k)
+			if(ssidSubPart[k] >= 'A')
+				ssidSubPart[k] = (char) (ssidSubPart[k] - 55);
 
-		if (bssidLastByte[0] >= 'A') bssidLastByte[0] = (char) (bssidLastByte[0] - 55);
-		if (bssidLastByte[1] >= 'A') bssidLastByte[1] = (char) (bssidLastByte[1] - 55);
+		if(bssidLastByte[0] >= 'A')
+			bssidLastByte[0] = (char) (bssidLastByte[0] - 55);
+		if(bssidLastByte[1] >= 'A')
+			bssidLastByte[1] = (char) (bssidLastByte[1] - 55);
 
 		List<String> passList = new ArrayList<String>();
-		for (int i = 0; i < 10; ++i) {
+		for(int i = 0; i < 10; ++i) {
 			/* Do not change the order of this instructions */
-			int aux = i + (ssidSubPart[3] & 0xf) + (bssidLastByte[0] & 0xf) + (bssidLastByte[1] & 0xf);
+			int aux = i + (ssidSubPart[3] & 0xf) + (bssidLastByte[0] & 0xf)
+					+ (bssidLastByte[1] & 0xf);
 			int aux1 = (ssidSubPart[1] & 0xf) + (ssidSubPart[2] & 0xf) + (ssidSubPart[4] & 0xf)
 					+ (ssidSubPart[5] & 0xf);
 			int second = aux ^ (ssidSubPart[5] & 0xf);
@@ -115,7 +119,7 @@ public class Wlan6XAlgorithm extends CrackAlgorithm {
 			passList.add(key.toUpperCase());
 		}
 		StringBuilder s = new StringBuilder();
-		for (String sp : passList)
+		for(String sp : passList)
 			s.append(sp + "\n");
 		Log.d("pulWifi", "CLAVE -> " + s.toString());
 		return s.toString();

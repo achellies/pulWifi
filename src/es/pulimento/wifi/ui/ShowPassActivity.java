@@ -40,8 +40,6 @@ import es.pulimento.wifi.ui.dialogs.ClipboardCopyDialog;
 import es.pulimento.wifi.ui.dialogs.ShowPasswordsDialog;
 import es.pulimento.wifi.ui.utils.ExceptionHandler;
 
-
-
 @SuppressWarnings("deprecation")
 public class ShowPassActivity extends SherlockActivity implements OnClickListener {
 
@@ -68,9 +66,9 @@ public class ShowPassActivity extends SherlockActivity implements OnClickListene
 		((Button) findViewById(R.id.layout_showpass_clipboard)).setOnClickListener(this);
 		((Button) findViewById(R.id.layout_showpass_show)).setOnClickListener(this);
 
-		if (mWirelessNetwork.getPasswords().get(0) == null) {
+		if(mWirelessNetwork.getPasswords().get(0) == null) {
 			// TODO: Show error dialog...
-		} else if (mWirelessNetwork.getPasswords().get(0).equals("")) {
+		} else if(mWirelessNetwork.getPasswords().get(0).equals("")) {
 			Toast.makeText(mContext, R.string.showpass_nopass, Toast.LENGTH_LONG).show();
 			startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
 			this.finish();
@@ -79,12 +77,12 @@ public class ShowPassActivity extends SherlockActivity implements OnClickListene
 
 	@Override
 	public void onClick(View v) {
-		switch (v.getId()) {
+		switch(v.getId()) {
 			case R.id.layout_showpass_show:
 				(new ShowPasswordsDialog(mContext, mWirelessNetwork.getPasswords())).show();
 				break;
 			case R.id.layout_showpass_clipboard:
-				if (mWirelessNetwork.getPasswords().size() > 1) {
+				if(mWirelessNetwork.getPasswords().size() > 1) {
 					(new ClipboardCopyDialog(mContext, mWirelessNetwork.getPasswords())).show();
 				} else {
 					ClipboardManager mClipboardManager = (ClipboardManager) mContext
@@ -93,7 +91,8 @@ public class ShowPassActivity extends SherlockActivity implements OnClickListene
 					Toast.makeText(
 							mContext,
 							mContext.getString(R.string.showpass_toclipboard) + " ("
-									+ mWirelessNetwork.getPasswords().get(0) + ")", Toast.LENGTH_LONG).show();
+									+ mWirelessNetwork.getPasswords().get(0) + ")",
+							Toast.LENGTH_LONG).show();
 					Intent i = new Intent(Settings.ACTION_WIFI_SETTINGS);
 					i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 					mContext.startActivity(i);
@@ -110,7 +109,7 @@ public class ShowPassActivity extends SherlockActivity implements OnClickListene
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
+		switch(item.getItemId()) {
 			case R.id.menu_showpass_back:
 				this.finish();
 				break;

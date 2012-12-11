@@ -79,7 +79,8 @@ public class DlinkAlgorithm extends CrackAlgorithm {
 
 		// Process key throught the real algorithm...
 		char[] key = new char[20];
-		char hash[] = { 'X', 'r', 'q', 'a', 'H', 'N', 'p', 'd', 'S', 'Y', 'w', '8', '6', '2', '1', '5' };
+		char hash[] = { 'X', 'r', 'q', 'a', 'H', 'N', 'p', 'd', 'S', 'Y', 'w', '8', '6', '2', '1',
+				'5' };
 		int index = 0;
 		for(int i = 0; i < 20; i++) {
 			if((data[i] >= '0') && (data[i] <= '9'))

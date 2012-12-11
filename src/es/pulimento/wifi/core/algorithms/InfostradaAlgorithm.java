@@ -54,7 +54,7 @@ public class InfostradaAlgorithm extends CrackAlgorithm {
 		// Delete dots from bssid and use caps only...
 		bssid_data = bssid_data.replace(":", "").toUpperCase();
 
-		return 2+bssid_data;
+		return 2 + bssid_data;
 	}
 
 	/**
