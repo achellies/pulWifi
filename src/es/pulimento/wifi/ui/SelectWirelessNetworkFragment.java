@@ -57,7 +57,7 @@ import es.pulimento.wifi.core.WirelessNetwork;
 
 public class SelectWirelessNetworkFragment extends ListFragment implements OnClickListener {
 
-	private List<WirelessNetwork> mWirelessNetList;
+	private ArrayList<WirelessNetwork> mWirelessNetList;
 	private WifiManager mWifiManager;
 	private Vibrator mVibrator;
 	private LinearLayout mRefreshSection;
@@ -76,8 +76,14 @@ public class SelectWirelessNetworkFragment extends ListFragment implements OnCli
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 
+		if(savedInstanceState != null) {
+			mWirelessNetList = savedInstanceState.getParcelableArrayList("networks");
+		} else {
+			mWirelessNetList = new ArrayList<WirelessNetwork>();
+		}
+
 		mActivity = getActivity();
-		mWirelessNetList = new ArrayList<WirelessNetwork>();
+
 		setListAdapter(new NetworkListAdapter(mWirelessNetList, mActivity));
 		mWifiManager = (WifiManager) mActivity.getSystemService(Context.WIFI_SERVICE);
 		mVibrator = (Vibrator) mActivity.getSystemService(Context.VIBRATOR_SERVICE);
@@ -123,6 +129,12 @@ public class SelectWirelessNetworkFragment extends ListFragment implements OnCli
 	@Override
 	public void onClick(View v) {
 		mWifiManager.startScan();
+	}
+
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		outState.putParcelableArrayList("networks", mWirelessNetList);
+		super.onSaveInstanceState(outState);
 	}
 
 	@Override
@@ -254,7 +266,7 @@ class NetworkListAdapter implements ListAdapter {
 		Collections.sort(mItems);
 
 		if(convertView == null)
-			convertView = mLayoutInflater.inflate(R.layout.layout_selectwireless_listitem, null);
+			convertView = mLayoutInflater.inflate(R.layout.listitem_wirelessnetwork, null);
 
 		WirelessNetwork item = mItems.get(position);
 		if(item != null) {

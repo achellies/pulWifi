@@ -66,17 +66,17 @@ public class HomeActivity extends SherlockFragmentActivity {
 
 		/* Create a viewpager and add two pages to it. */
 		mPager = (ViewPager) findViewById(R.id.pager);
-		mPager.setPageMargin(getResources().getDimensionPixelSize(R.dimen.page_margin));
-		PagerHeader pagerHeader = (PagerHeader) findViewById(R.id.pager_header);
-		PagerAdapter pagerAdapter = new PagerAdapter(this, mPager, pagerHeader);
 
-		pagerAdapter
-				.addPage(SelectWirelessNetworkFragment.class, R.string.page_label_networks_list);
-		pagerAdapter.addPage(ManualFragment.class, R.string.page_label_manual);
+		// Occurs when showing multiple fragments simultaneously
+		if(mPager != null) {
+			mPager.setPageMargin(getResources().getDimensionPixelSize(R.dimen.page_margin));
+			PagerHeader pagerHeader = (PagerHeader) findViewById(R.id.pager_header);
+			PagerAdapter pagerAdapter = new PagerAdapter(this, mPager, pagerHeader);
+			pagerAdapter.addPage(SelectWirelessNetworkFragment.class,
+					R.string.page_label_networks_list);
+			pagerAdapter.addPage(ManualFragment.class, R.string.page_label_manual);
+		}
 
-		/* Show disclaimer... */
-		Toast.makeText(HomeActivity.this, R.string.toast_disclaimer_text, Toast.LENGTH_LONG).show();
-		
 		/* Check for updates */
 		new UpdateChecker(this).work();
 	}

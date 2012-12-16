@@ -43,7 +43,7 @@ public class ManualFragment extends Fragment implements OnClickListener {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		/* create view and return it */
-		View inflatedView = inflater.inflate(R.layout.layout_manualfragment, container, false);
+		View inflatedView = inflater.inflate(R.layout.fragment_manualmode, container, false);
 		mEditTextEssid = (EditText) inflatedView.findViewById(R.id.layout_manualcrack_essid);
 		mEditTextBssid = (EditText) inflatedView.findViewById(R.id.layout_manualcrack_bssid);
 		mButtonAccept = (Button) inflatedView.findViewById(R.id.layout_manualcrack_accept);
@@ -76,5 +76,16 @@ public class ManualFragment extends Fragment implements OnClickListener {
 		i.putExtra(ShowPassActivity.EXTRA_NETWORK, mWirelessNetwork);
 		startActivity(i);
 		return;
+	}
+
+	public class BottomFragment extends Fragment {
+
+
+		@Override
+		public View onCreateView(LayoutInflater inflater, ViewGroup container,
+				Bundle savedInstanceState) {
+			return inflater.inflate(R.layout.fragment_bottom, container, false);
+		}
+
 	}
 }

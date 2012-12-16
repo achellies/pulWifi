@@ -25,6 +25,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.widget.Toast;
 import es.pulimento.wifi.BuildConfig;
 import es.pulimento.wifi.R;
 import es.pulimento.wifi.ui.utils.Constants;
@@ -104,6 +105,9 @@ public class SplashscreenActivity extends Activity {
 			super.handleMessage(msg);
 			switch(msg.what) {
 				case Constants.MSG_WIFI_DONE:
+					/* Show disclaimer... */
+					Toast.makeText(SplashscreenActivity.this, R.string.toast_disclaimer_text, Toast.LENGTH_LONG).show();
+
 					mActivity.startActivity(new Intent(mActivity, HomeActivity.class)
 							.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
 					mActivity.finish();
