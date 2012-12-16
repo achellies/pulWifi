@@ -42,12 +42,12 @@ import es.pulimento.wifi.BuildConfig;
 import es.pulimento.wifi.R;
 import es.pulimento.wifi.ui.dialogs.SupportedNetworksDialog;
 import es.pulimento.wifi.ui.utils.ExceptionHandler;
+import es.pulimento.wifi.ui.utils.UpdateChecker;
 import es.pulimento.wifi.ui.views.PagerHeader;
 
 public class HomeActivity extends SherlockFragmentActivity {
 
 	private ViewPager mPager;
-	private Context mContext;
 	private SharedPreferences mSharedPreferences;
 
 	@Override
@@ -62,7 +62,6 @@ public class HomeActivity extends SherlockFragmentActivity {
 		setContentView(R.layout.activity_home);
 
 		/* Setting attributes... */
-		mContext = getApplicationContext();
 		mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
 		/* Create a viewpager and add two pages to it. */
@@ -77,6 +76,9 @@ public class HomeActivity extends SherlockFragmentActivity {
 
 		/* Show disclaimer... */
 		Toast.makeText(HomeActivity.this, R.string.toast_disclaimer_text, Toast.LENGTH_LONG).show();
+		
+		/* Check for updates */
+		new UpdateChecker(this).work();
 	}
 
 	@Override
@@ -91,8 +93,8 @@ public class HomeActivity extends SherlockFragmentActivity {
 			Locale.setDefault(locale);
 			Configuration config = new Configuration();
 			config.locale = locale;
-			mContext.getResources().updateConfiguration(config,
-					mContext.getResources().getDisplayMetrics());
+			HomeActivity.this.getResources().updateConfiguration(config,
+					HomeActivity.this.getResources().getDisplayMetrics());
 		}
 	}
 
@@ -120,7 +122,7 @@ public class HomeActivity extends SherlockFragmentActivity {
 				(new SupportedNetworksDialog(this)).show();
 				break;
 			case R.id.menu_settings:
-				startActivity(new Intent(mContext, Preferences.class));
+				startActivity(new Intent(HomeActivity.this, Preferences.class));
 				break;
 		}
 		return super.onOptionsItemSelected(item);

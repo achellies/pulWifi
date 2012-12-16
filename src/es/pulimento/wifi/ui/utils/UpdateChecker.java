@@ -22,11 +22,10 @@ package es.pulimento.wifi.ui.utils;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.os.Handler;
-import android.os.Message;
+import android.util.Log;
 import android.widget.Toast;
 import es.pulimento.wifi.R;
-import es.pulimento.wifi.ui.MainActivity;
+import es.pulimento.wifi.ui.Preferences;
 import es.pulimento.wifi.ui.dialogs.UpdateDialog;
 import es.pulimento.wifi.ui.utils.github.Download;
 import es.pulimento.wifi.ui.utils.github.GithubApi;
@@ -42,26 +41,21 @@ public class UpdateChecker implements Runnable {
 	/*
 	 * Global variables.
 	 */
-	private Handler mHandler;
 	private Activity mActivity;
 	private UpdateDialog mUpdateDialog;
 	private ProgressDialog mProgressDialog;
 
-	public UpdateChecker(Activity activity, Handler handler) {
+	public UpdateChecker(Activity activity/*, Handler handler*/) {
 		/*
 		 * Initialize variables.
 		 */
-		mHandler = handler;
+
 		mActivity = activity;
 		mUpdateDialog = null;
-		mProgressDialog = null;
-
-		if(mHandler == null) {
-			mProgressDialog = new ProgressDialog(mActivity);
-			mProgressDialog.setTitle("");
-			mProgressDialog.setMessage(mActivity.getString(R.string.dialog_updater_checking));
-			mProgressDialog.setCancelable(true);
-		}
+		mProgressDialog = new ProgressDialog(mActivity);
+		mProgressDialog.setTitle("");
+		mProgressDialog.setMessage(mActivity.getString(R.string.dialog_updater_checking));
+		mProgressDialog.setCancelable(true);
 	}
 
 	/*
@@ -69,31 +63,27 @@ public class UpdateChecker implements Runnable {
 	 */
 	@Override
 	public void run() {
+		Log.i("pulWifi", "Checking updates...");
 		final Download d = (new GithubApi()).getLastDownload();
 		if(d != null) {
 			if(!d.getVersion().equals(mActivity.getString(R.string.app_version))) {
 				// Newer release available
+				Log.i("pulWifi", "Newer release available");
 				mActivity.runOnUiThread(new Runnable() {
 					@Override
 					public void run() {
-						mUpdateDialog = new UpdateDialog(mActivity, d.getUrl(), new EventHandler());
+						mUpdateDialog = new UpdateDialog(mActivity, d.getUrl()/*, new EventHandler()*/);
 						mUpdateDialog.show();
 					}
 				});
 			} else { // Running latest version
-				if(mHandler != null)
-					mHandler.sendEmptyMessage(MSG_UPDATE_DONE);
-				else
+				// No action if auto-updater
+				Log.i("pulWifi", "Currently running latest version");
+				if(Preferences.class.equals(mActivity.getClass())) {// Manual update check
 					mActivity.runOnUiThread(new Runnable() {
 						@Override
 						public void run() {
 							mProgressDialog.dismiss();
-						}
-					});
-				if(!MainActivity.class.equals(mActivity.getClass())) {// Not at startup
-					mActivity.runOnUiThread(new Runnable() {
-						@Override
-						public void run() {
 							Toast.makeText(
 									mActivity,
 									mActivity.getApplicationContext().getString(
@@ -103,20 +93,14 @@ public class UpdateChecker implements Runnable {
 					});
 				}
 			}
-		} else { // Error getting last version available, continue
-			if(mHandler != null)
-				mHandler.sendEmptyMessage(MSG_UPDATE_DONE);
-			else
+		} else { // Error getting last version available
+			// No action if auto-updater
+			Log.w("pulWifi", "Error getting last version available");
+			if(Preferences.class.equals(mActivity.getClass())) {// Manual update check
 				mActivity.runOnUiThread(new Runnable() {
 					@Override
 					public void run() {
 						mProgressDialog.dismiss();
-					}
-				});
-			if(!MainActivity.class.equals(mActivity.getClass())) {// Not at startup
-				mActivity.runOnUiThread(new Runnable() {
-					@Override
-					public void run() {
 						Toast.makeText(
 								mActivity,
 								mActivity.getApplicationContext().getString(
@@ -132,37 +116,17 @@ public class UpdateChecker implements Runnable {
 		 * Do check.
 		 */
 		new Thread(this).start();
-		if(mProgressDialog != null)
+		if(Preferences.class.equals(mActivity.getClass()))
 			mProgressDialog.show();
 	}
 
-	public void clean() {
-		/*
-		 * Clean.
-		 */
-		if(mUpdateDialog != null)
-			mUpdateDialog.dismiss();
-		if(mProgressDialog != null)
-			mProgressDialog.dismiss();
-	}
-
-	/*
-	 * Class that holds all event handling...
-	 */
-	public class EventHandler extends Handler {
-		@Override
-		public void handleMessage(Message msg) {
-			super.handleMessage(msg);
-			/* There's just one event to handle so no switch... */
-			if(mHandler != null)
-				mHandler.sendEmptyMessage(MSG_UPDATE_DONE);
-			else
-				mActivity.runOnUiThread(new Runnable() {
-					@Override
-					public void run() {
-						mProgressDialog.dismiss();
-					}
-				});
-		}
-	}
+	// public void clean() {
+	// /*
+	// * Clean.
+	// */
+	// if(mUpdateDialog != null)
+	// mUpdateDialog.dismiss();
+	// if(mProgressDialog != null)
+	// mProgressDialog.dismiss();
+	// }
 }

@@ -35,11 +35,6 @@ import es.pulimento.wifi.ui.dialogs.FailedDialog;
 public class WifiEnabler extends BroadcastReceiver {
 
 	/*
-	 * Public constants.
-	 */
-	final public static int MSG_WIFI_ENABLED = 1;
-
-	/*
 	 * Global variables.
 	 */
 	private Handler mHandler;
@@ -70,12 +65,12 @@ public class WifiEnabler extends BroadcastReceiver {
 		switch(intent.getIntExtra(WifiManager.EXTRA_WIFI_STATE, -1)) {
 			case WifiManager.WIFI_STATE_UNKNOWN:
 				if(BuildConfig.DEBUG)
-					mHandler.sendEmptyMessage(MSG_WIFI_ENABLED);
+					mHandler.sendEmptyMessage(Constants.MSG_WIFI_DONE);
 				else
 					mFailedDialog.show();
 				break;
 			case WifiManager.WIFI_STATE_ENABLED:
-				mHandler.sendEmptyMessage(MSG_WIFI_ENABLED);
+				mHandler.sendEmptyMessage(Constants.MSG_WIFI_DONE);
 				break;
 			case WifiManager.WIFI_STATE_DISABLED:
 				mEnableWifiDialog.show();
@@ -83,7 +78,10 @@ public class WifiEnabler extends BroadcastReceiver {
 		}
 	}
 
-	public void work() {
+	/**
+	 * @return boolean indicating whether it was necessary to turn on wifi
+	 */
+	public boolean work() {
 		/*
 		 * Register receiver.
 		 */
@@ -92,9 +90,12 @@ public class WifiEnabler extends BroadcastReceiver {
 		/*
 		 * Is wifi enabled? If not ask for it...
 		 */
-		if(mWifiManager.getWifiState() != WifiManager.WIFI_STATE_ENABLED)
+		if(mWifiManager.getWifiState() != WifiManager.WIFI_STATE_ENABLED) {
 			mEnableWifiDialog.show();
-	}
+			return true;
+		}
+		return false;
+}
 
 	public void clean() {
 		/*

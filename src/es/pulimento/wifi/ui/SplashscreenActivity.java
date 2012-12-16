@@ -27,21 +27,20 @@ import android.os.Handler;
 import android.os.Message;
 import es.pulimento.wifi.BuildConfig;
 import es.pulimento.wifi.R;
+import es.pulimento.wifi.ui.utils.Constants;
 import es.pulimento.wifi.ui.utils.ExceptionHandler;
-import es.pulimento.wifi.ui.utils.UpdateChecker;
 import es.pulimento.wifi.ui.utils.WifiEnabler;
 
 /**
  * Simple splash screen that is used to check some pre-requisites before running.
  */
-public class MainActivity extends Activity {
+public class SplashscreenActivity extends Activity {
 
 	private Handler mHandler;
 	private Activity mActivity;
-	private Boolean mWifiDone;
-	private Boolean mUpdatesDone;
 	private WifiEnabler mWifiEnabler;
-	private UpdateChecker mUpdateChecker;
+	@SuppressWarnings("unused")
+	private boolean neededToActivateWifi;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -56,11 +55,8 @@ public class MainActivity extends Activity {
 
 		/* Initialize variables... */
 		mActivity = this;
-		mWifiDone = false;
-		mUpdatesDone = false;
 		mHandler = new EventHandler();
 		mWifiEnabler = new WifiEnabler(mActivity, mHandler);
-		mUpdateChecker = new UpdateChecker(mActivity, mHandler);
 	}
 
 	@Override
@@ -70,8 +66,22 @@ public class MainActivity extends Activity {
 		/*
 		 * Do checks.
 		 */
-		mWifiEnabler.work();
-		mUpdateChecker.work();
+		neededToActivateWifi = mWifiEnabler.work();
+		
+//		if(!neededToActivateWifi)
+//			// Show splashcreen for 2 seconds
+//			try {
+//				Timer t1 = new Timer();
+//				t1.schedule(new TimerTask() {
+//					
+//					@Override
+//					public void run() {
+//						mHandler.sendEmptyMessage(Constants.MSG_WIFI_DONE);
+//					}
+//				}, 2000L);
+//			} catch (InterruptedException e) {
+//				e.printStackTrace();
+//			}
 	}
 
 	@Override
@@ -82,7 +92,6 @@ public class MainActivity extends Activity {
 		 * Clean it all.
 		 */
 		mWifiEnabler.clean();
-		mUpdateChecker.clean();
 	}
 
 	/*
@@ -94,17 +103,11 @@ public class MainActivity extends Activity {
 		public void handleMessage(Message msg) {
 			super.handleMessage(msg);
 			switch(msg.what) {
-				case WifiEnabler.MSG_WIFI_ENABLED:
-					mWifiDone = true;
+				case Constants.MSG_WIFI_DONE:
+					mActivity.startActivity(new Intent(mActivity, HomeActivity.class)
+							.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+					mActivity.finish();
 					break;
-				case UpdateChecker.MSG_UPDATE_DONE:
-					mUpdatesDone = true;
-			}
-
-			if(mWifiDone && mUpdatesDone) {
-				mActivity.startActivity(new Intent(mActivity, HomeActivity.class)
-						.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-				mActivity.finish();
 			}
 		}
 	}
