@@ -27,7 +27,7 @@ public class ExceptionHandler implements UncaughtExceptionHandler {
 
 	@Override
 	public void uncaughtException(Thread t, Throwable e) {
-		Log.e("pulWifi", "Uncaught exception!! Reporting...");
+		Log.e(Constants.TAG, "Uncaught exception!! Reporting...");
 		String version = Resources.getSystem().getString(R.string.app_version);
 		Issue i = new Issue("Exception in " + getFileName(e), "APP VERSION: " + version
 				+ "\nTRACE:\n" + getStackTrace(e) + "\n\nCAUSE TRACE:\n"

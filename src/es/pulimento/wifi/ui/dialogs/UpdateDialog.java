@@ -32,7 +32,7 @@ public class UpdateDialog extends AlertDialog implements OnClickListener {
 	private String mUri;
 	private Context mContext;
 
-	public UpdateDialog(Context context, String uri/*, Handler handler*/) {
+	public UpdateDialog(Context context, String uri) {
 		super(context);
 
 		mUri = uri;

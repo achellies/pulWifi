@@ -23,7 +23,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.util.Log;
+import es.pulimento.wifi.BuildConfig;
 import es.pulimento.wifi.core.WirelessNetwork.WirelessEncryption;
+import es.pulimento.wifi.ui.utils.Constants;
 
 public class Wlan6XAlgorithm extends CrackAlgorithm {
 
@@ -65,7 +67,8 @@ public class Wlan6XAlgorithm extends CrackAlgorithm {
 	public static String crack2(String ESSID, String BSSID) {
 		String ssidStr = ESSID.substring(ESSID.length() - 6);
 		String macStr = BSSID;
-		Log.e("pulWifi", "Using new WLAN6X algorythm, " + ssidStr + " " + macStr);
+		if(BuildConfig.DEBUG)
+			Log.e(Constants.TAG, "Using new WLAN6X algorythm, " + ssidStr + " " + macStr);
 		char[] ssidSubPart = { '1', '2', '3', '4', '5', '6' };// These values
 															  // are not
 															  // revelant.
@@ -121,7 +124,8 @@ public class Wlan6XAlgorithm extends CrackAlgorithm {
 		StringBuilder s = new StringBuilder();
 		for(String sp : passList)
 			s.append(sp + "\n");
-		Log.d("pulWifi", "CLAVE -> " + s.toString());
+		if(BuildConfig.DEBUG)
+		Log.d(Constants.TAG, "CLAVE -> " + s.toString());
 		return s.toString();
 	}
 

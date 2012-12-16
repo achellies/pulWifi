@@ -34,6 +34,7 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 
 import es.pulimento.wifi.R;
+import es.pulimento.wifi.ui.utils.Constants;
 import es.pulimento.wifi.ui.utils.ExceptionHandler;
 import es.pulimento.wifi.ui.utils.UpdateChecker;
 
@@ -105,7 +106,7 @@ public class Preferences extends SherlockPreferenceActivity {
 				apkVersion = pInfo.versionName;
 				apkVersionCode = pInfo.versionCode;
 			} catch (NameNotFoundException e) {
-				Log.e("pulWifi", "pulWifi is not installed?", e);
+				Log.e(Constants.TAG, "pulWifi is not installed?", e);
 			}
 			return 0;
 		}

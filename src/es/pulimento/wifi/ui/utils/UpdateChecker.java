@@ -45,7 +45,7 @@ public class UpdateChecker implements Runnable {
 	private UpdateDialog mUpdateDialog;
 	private ProgressDialog mProgressDialog;
 
-	public UpdateChecker(Activity activity/*, Handler handler*/) {
+	public UpdateChecker(Activity activity) {
 		/*
 		 * Initialize variables.
 		 */
@@ -63,22 +63,22 @@ public class UpdateChecker implements Runnable {
 	 */
 	@Override
 	public void run() {
-		Log.i("pulWifi", "Checking updates...");
+		Log.i(Constants.TAG, "Checking updates...");
 		final Download d = (new GithubApi()).getLastDownload();
 		if(d != null) {
 			if(!d.getVersion().equals(mActivity.getString(R.string.app_version))) {
 				// Newer release available
-				Log.i("pulWifi", "Newer release available");
+				Log.i(Constants.TAG, "Newer release available");
 				mActivity.runOnUiThread(new Runnable() {
 					@Override
 					public void run() {
-						mUpdateDialog = new UpdateDialog(mActivity, d.getUrl()/*, new EventHandler()*/);
+						mUpdateDialog = new UpdateDialog(mActivity, d.getUrl());
 						mUpdateDialog.show();
 					}
 				});
 			} else { // Running latest version
 				// No action if auto-updater
-				Log.i("pulWifi", "Currently running latest version");
+				Log.i(Constants.TAG, "Currently running latest version");
 				if(Preferences.class.equals(mActivity.getClass())) {// Manual update check
 					mActivity.runOnUiThread(new Runnable() {
 						@Override
@@ -95,7 +95,7 @@ public class UpdateChecker implements Runnable {
 			}
 		} else { // Error getting last version available
 			// No action if auto-updater
-			Log.w("pulWifi", "Error getting last version available");
+			Log.w(Constants.TAG, "Error getting last version available");
 			if(Preferences.class.equals(mActivity.getClass())) {// Manual update check
 				mActivity.runOnUiThread(new Runnable() {
 					@Override
@@ -120,13 +120,4 @@ public class UpdateChecker implements Runnable {
 			mProgressDialog.show();
 	}
 
-	// public void clean() {
-	// /*
-	// * Clean.
-	// */
-	// if(mUpdateDialog != null)
-	// mUpdateDialog.dismiss();
-	// if(mProgressDialog != null)
-	// mProgressDialog.dismiss();
-	// }
 }
