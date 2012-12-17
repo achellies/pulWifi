@@ -32,16 +32,13 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 
-import es.pulimento.wifi.BuildConfig;
 import es.pulimento.wifi.R;
 import es.pulimento.wifi.ui.dialogs.SupportedNetworksDialog;
-import es.pulimento.wifi.ui.utils.ExceptionHandler;
 import es.pulimento.wifi.ui.utils.UpdateChecker;
 import es.pulimento.wifi.ui.views.PagerHeader;
 
@@ -53,10 +50,6 @@ public class HomeActivity extends SherlockFragmentActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
-		/* Set exception handler... */
-		if(!BuildConfig.DEBUG)
-			Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler());
 
 		/* Set layout... */
 		setContentView(R.layout.activity_home);

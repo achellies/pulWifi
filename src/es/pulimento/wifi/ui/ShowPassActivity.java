@@ -38,7 +38,6 @@ import es.pulimento.wifi.R;
 import es.pulimento.wifi.core.WirelessNetwork;
 import es.pulimento.wifi.ui.dialogs.ClipboardCopyDialog;
 import es.pulimento.wifi.ui.dialogs.ShowPasswordsDialog;
-import es.pulimento.wifi.ui.utils.ExceptionHandler;
 
 @SuppressWarnings("deprecation")
 public class ShowPassActivity extends SherlockActivity implements OnClickListener {
@@ -51,11 +50,8 @@ public class ShowPassActivity extends SherlockActivity implements OnClickListene
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 
-		/* Set exception handler... */
-		Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler());
-
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.layout_showpass);
+		setContentView(R.layout.activity_showpass);
 
 		mContext = this;
 		mWirelessNetwork = this.getIntent().getExtras().getParcelable(EXTRA_NETWORK);

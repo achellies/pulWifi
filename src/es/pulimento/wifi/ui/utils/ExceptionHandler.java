@@ -4,10 +4,9 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.lang.Thread.UncaughtExceptionHandler;
 
-import android.content.res.Resources;
-import android.os.AsyncTask;
+import android.annotation.SuppressLint;
+import android.content.pm.PackageInfo;
 import android.util.Log;
-import es.pulimento.wifi.R;
 import es.pulimento.wifi.ui.utils.github.GithubApi;
 import es.pulimento.wifi.ui.utils.github.Issue;
 
@@ -19,20 +18,60 @@ public class ExceptionHandler implements UncaughtExceptionHandler {
 	// Variables.
 	private GithubApi mGithubApi;
 	private UncaughtExceptionHandler mDefaultHandler;
+	private PackageInfo info;
+	private ReportItem mReportItem;
+
+	public ExceptionHandler(PackageInfo info) {
+		mGithubApi = new GithubApi("2e567f61e1803ce46935f5c57bc715de2356a1f5");
+		mDefaultHandler = Thread.getDefaultUncaughtExceptionHandler();
+		this.info = info;
+	}
 
 	public ExceptionHandler() {
 		mGithubApi = new GithubApi("2e567f61e1803ce46935f5c57bc715de2356a1f5");
 		mDefaultHandler = Thread.getDefaultUncaughtExceptionHandler();
 	}
 
+	@SuppressLint("NewApi")
+	// Code requiring API > 11 here really doesn't run on pre-HoneyComb devices
 	@Override
 	public void uncaughtException(Thread t, Throwable e) {
 		Log.e(Constants.TAG, "Uncaught exception!! Reporting...");
-		String version = Resources.getSystem().getString(R.string.app_version);
-		Issue i = new Issue("Exception in " + getFileName(e), "APP VERSION: " + version
-				+ "\nTRACE:\n" + getStackTrace(e) + "\n\nCAUSE TRACE:\n"
-				+ getStackTrace(e.getCause()), "Automated Report");
-		new ReportTask().execute(new ReportItem(i, t, e));
+		// String version = Resources.getSystem().getString(R.string.app_version);
+
+		// Format string version to add to the report
+		String version = null;
+		if(info != null) {
+			version = "PackageName = " + info.packageName + "\nVersionCode = " + info.versionCode
+					+ "\nVersionName = " + info.versionName + "\n";
+		} else {
+			version = "<ERROR GETTING PACKAGE INFO>";
+		}
+
+		// Create issue to report
+		Issue i = new Issue("Exception in " + getFileName(e), version + "\nTRACE:\n"
+				+ getStackTrace(e) + "\n\nCAUSE TRACE:\n" + getStackTrace(e.getCause()),
+				"Automated Report", info.versionName);
+
+		mReportItem = new ReportItem(i, t, e);
+
+		Runnable runnable = new Runnable() {
+
+			@Override
+			public void run() {
+				ReportItem reportItem = mReportItem;
+				mGithubApi.reportIssue(reportItem.getIssue());
+				mDefaultHandler
+						.uncaughtException(reportItem.getThread(), reportItem.getThrowable());
+			}
+		};
+
+		Thread thread = new Thread(runnable);
+		thread.start();
+		thread.run();
+
+		// Fallback
+		mDefaultHandler.uncaughtException(t, e);
 	}
 
 	public String getFileName(Throwable e) {
@@ -82,12 +121,17 @@ public class ExceptionHandler implements UncaughtExceptionHandler {
 		}
 	}
 
+	/*
 	class ReportTask extends AsyncTask<ReportItem, Void, Void> {
+
 		@Override
 		protected Void doInBackground(ReportItem... params) {
-			mGithubApi.reportIssue(params[0].getIssue());
-			mDefaultHandler.uncaughtException(params[0].getThread(), params[0].getThrowable());
+
+			ReportItem reportItem = params[0];
+			mGithubApi.reportIssue(reportItem.getIssue());
+			mDefaultHandler.uncaughtException(reportItem.getThread(), reportItem.getThrowable());
+
 			return null;
 		}
-	}
+	}*/
 }

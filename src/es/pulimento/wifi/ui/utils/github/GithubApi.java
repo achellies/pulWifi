@@ -88,12 +88,14 @@ public class GithubApi {
 	 * @param i Issue to post in Github.
 	 */
 	public void reportIssue(Issue i) {
-		if(!mAuthed)
+		if(!mAuthed)		
 			return;
-
-		// If issue was already reported do nothing.
-		if(getIssues().contains(i))
-			return;
+		
+		// This made report system not to work
+		
+//		 If issue was already reported do nothing.
+//		if(getIssues().contains(i))
+//			return;
 
 		HttpPost httpPost = new HttpPost(BASEURL + "issues");
 		httpPost.setHeader("Authorization", "token " + mToken);

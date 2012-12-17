@@ -35,7 +35,6 @@ import com.actionbarsherlock.view.MenuItem;
 
 import es.pulimento.wifi.R;
 import es.pulimento.wifi.ui.utils.Constants;
-import es.pulimento.wifi.ui.utils.ExceptionHandler;
 import es.pulimento.wifi.ui.utils.UpdateChecker;
 
 public class Preferences extends SherlockPreferenceActivity {
@@ -61,9 +60,6 @@ public class Preferences extends SherlockPreferenceActivity {
 	@Override
 	@SuppressWarnings("deprecation")
 	protected void onCreate(Bundle savedInstanceState) {
-
-		/* Set exception handler... */
-		Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler());
 
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.preferences);
