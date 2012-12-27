@@ -22,10 +22,12 @@ package es.pulimento.wifi.ui.utils;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.ContentValues;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 import android.widget.Toast;
 import es.pulimento.wifi.R;
-import es.pulimento.wifi.ui.Preferences;
 import es.pulimento.wifi.ui.dialogs.UpdateDialog;
 import es.pulimento.wifi.ui.utils.github.Download;
 import es.pulimento.wifi.ui.utils.github.GithubApi;
@@ -44,18 +46,21 @@ public class UpdateChecker implements Runnable {
 	private Activity mActivity;
 	private UpdateDialog mUpdateDialog;
 	private ProgressDialog mProgressDialog;
+	private SQLiteDatabase mDatabase;
+	private boolean mAuto;
 
-	public UpdateChecker(Activity activity) {
+	public UpdateChecker(Activity activity, boolean auto) {
 		/*
 		 * Initialize variables.
 		 */
-
 		mActivity = activity;
 		mUpdateDialog = null;
 		mProgressDialog = new ProgressDialog(mActivity);
 		mProgressDialog.setTitle("");
 		mProgressDialog.setMessage(mActivity.getString(R.string.dialog_updater_checking));
 		mProgressDialog.setCancelable(true);
+		mDatabase = (new UpdateCheckerDB(mActivity)).getWritableDatabase();
+		mAuto = auto;
 	}
 
 	/*
@@ -63,6 +68,16 @@ public class UpdateChecker implements Runnable {
 	 */
 	@Override
 	public void run() {
+		// Register in database that updates have been checked
+		if(mAuto) {
+			ContentValues cv = new ContentValues();
+			cv.put(UpdateCheckerDB.TIMESTAMP_FIELD, System.currentTimeMillis());
+			mDatabase.insertOrThrow(UpdateCheckerDB.UPDATER_TABLE_NAME,
+					UpdateCheckerDB.TIMESTAMP_FIELD, cv);
+		}
+		// db not longer needed
+		mDatabase.close();
+
 		Log.i(Constants.TAG, "Checking updates...");
 		final Download d = (new GithubApi()).getLastDownload();
 		if(d != null) {
@@ -79,7 +94,7 @@ public class UpdateChecker implements Runnable {
 			} else { // Running latest version
 				// No action if auto-updater
 				Log.i(Constants.TAG, "Currently running latest version");
-				if(Preferences.class.equals(mActivity.getClass())) {// Manual update check
+				if(!mAuto) {// Manual update check
 					mActivity.runOnUiThread(new Runnable() {
 						@Override
 						public void run() {
@@ -96,7 +111,7 @@ public class UpdateChecker implements Runnable {
 		} else { // Error getting last version available
 			// No action if auto-updater
 			Log.w(Constants.TAG, "Error getting last version available");
-			if(Preferences.class.equals(mActivity.getClass())) {// Manual update check
+			if(!mAuto) {// Manual update check
 				mActivity.runOnUiThread(new Runnable() {
 					@Override
 					public void run() {
@@ -112,12 +127,45 @@ public class UpdateChecker implements Runnable {
 	}
 
 	public void work() {
-		/*
-		 * Do check.
-		 */
-		new Thread(this).start();
-		if(Preferences.class.equals(mActivity.getClass()))
+
+		// Do check.
+		if(mAuto && !updatesCheckedRecently()) {
+			new Thread(this).start();
+		} else {
+			Log.w(Constants.TAG, "Auto-updater skipped");
+		}
+
+		if(!mAuto)
 			mProgressDialog.show();
+	}
+
+	public boolean updatesCheckedRecently() {
+		boolean res = false;
+		Cursor cursor = mDatabase.query(UpdateCheckerDB.UPDATER_TABLE_NAME,
+				new String[] { UpdateCheckerDB.TIMESTAMP_FIELD }, null, null, null, null, null);
+
+		if(cursor != null && cursor.moveToLast()) {
+			int TSTAMP_INDEX = cursor.getColumnIndexOrThrow(UpdateCheckerDB.TIMESTAMP_FIELD);
+
+			long lastTimestampOnDB = cursor.getLong(TSTAMP_INDEX);
+			long millisecondsDiference = System.currentTimeMillis() - lastTimestampOnDB;
+
+			if(millisecondsDiference < Constants.MILLIS_PER_DAY) {
+				// Updates checked at most 24 hours ago
+				res = true;
+			}
+		}
+		destroyCursor(cursor);
+
+		return res;
+	}
+
+	private void destroyCursor(Cursor c) {
+		if(c != null) {
+			if(!c.isClosed())
+				c.close();
+			c = null;
+		}
 	}
 
 }

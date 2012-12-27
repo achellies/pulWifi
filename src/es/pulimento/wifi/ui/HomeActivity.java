@@ -71,7 +71,7 @@ public class HomeActivity extends SherlockFragmentActivity {
 		}
 
 		/* Check for updates */
-		new UpdateChecker(this).work();
+		new UpdateChecker(this,true).work();
 	}
 
 	@Override

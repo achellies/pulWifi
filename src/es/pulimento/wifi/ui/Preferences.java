@@ -78,7 +78,7 @@ public class Preferences extends SherlockPreferenceActivity {
 	public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
 		String pref = preference.getKey();
 		if(pref.equals(getString(R.string.preferences_updater_key))) {
-			new UpdateChecker(this).work();
+			new UpdateChecker(this,false).work();
 			return true;
 		}
 		if(pref.equals(getString(R.string.preferences_about_key))) {
