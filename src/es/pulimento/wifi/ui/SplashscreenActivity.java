@@ -29,7 +29,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.widget.Toast;
-import es.pulimento.wifi.BuildConfig;
 import es.pulimento.wifi.R;
 import es.pulimento.wifi.ui.utils.Constants;
 import es.pulimento.wifi.ui.utils.ExceptionHandler;

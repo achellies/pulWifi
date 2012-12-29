@@ -91,12 +91,6 @@ public class GithubApi {
 		if(!mAuthed)		
 			return;
 		
-		// This made report system not to work
-		
-//		 If issue was already reported do nothing.
-//		if(getIssues().contains(i))
-//			return;
-
 		HttpPost httpPost = new HttpPost(BASEURL + "issues");
 		httpPost.setHeader("Authorization", "token " + mToken);
 		httpPost.setHeader("Content-Type", "application/json");
@@ -111,6 +105,10 @@ public class GithubApi {
 			// Should not happen
 		} catch (IOException e) {
 			// No internet...
+			//saveIssueToDB(i);
+			//Log.i(Constants.TAG,"Reporting failed!! Saving issue...");
 		}
 	}
+	
+
 }

@@ -84,9 +84,12 @@ public class UpdateChecker implements Runnable {
 			if(!d.getVersion().equals(mActivity.getString(R.string.app_version))) {
 				// Newer release available
 				Log.i(Constants.TAG, "Newer release available");
+
 				mActivity.runOnUiThread(new Runnable() {
 					@Override
 					public void run() {
+						if(mProgressDialog != null)
+							mProgressDialog.dismiss();
 						mUpdateDialog = new UpdateDialog(mActivity, d.getUrl());
 						mUpdateDialog.show();
 					}
@@ -98,7 +101,8 @@ public class UpdateChecker implements Runnable {
 					mActivity.runOnUiThread(new Runnable() {
 						@Override
 						public void run() {
-							mProgressDialog.dismiss();
+							if(mProgressDialog != null)
+								mProgressDialog.dismiss();
 							Toast.makeText(
 									mActivity,
 									mActivity.getApplicationContext().getString(
@@ -115,7 +119,8 @@ public class UpdateChecker implements Runnable {
 				mActivity.runOnUiThread(new Runnable() {
 					@Override
 					public void run() {
-						mProgressDialog.dismiss();
+						if(mProgressDialog != null)
+							mProgressDialog.dismiss();
 						Toast.makeText(
 								mActivity,
 								mActivity.getApplicationContext().getString(
@@ -129,11 +134,12 @@ public class UpdateChecker implements Runnable {
 	public void work() {
 
 		// Do check.
-		if(mAuto && !updatesCheckedRecently()) {
-			new Thread(this).start();
-		} else {
+		if(mAuto && updatesCheckedRecently()) {
 			Log.w(Constants.TAG, "Auto-updater skipped");
+			return;
 		}
+
+		new Thread(this).start();
 
 		if(!mAuto)
 			mProgressDialog.show();

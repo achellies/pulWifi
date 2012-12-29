@@ -37,8 +37,7 @@ public class ExceptionHandler implements UncaughtExceptionHandler {
 	@Override
 	public void uncaughtException(Thread t, Throwable e) {
 		Log.e(Constants.TAG, "Uncaught exception!! Reporting...");
-		// String version = Resources.getSystem().getString(R.string.app_version);
-
+		
 		// Format string version to add to the report
 		String version = null;
 		if(info != null) {
@@ -121,17 +120,4 @@ public class ExceptionHandler implements UncaughtExceptionHandler {
 		}
 	}
 
-	/*
-	class ReportTask extends AsyncTask<ReportItem, Void, Void> {
-
-		@Override
-		protected Void doInBackground(ReportItem... params) {
-
-			ReportItem reportItem = params[0];
-			mGithubApi.reportIssue(reportItem.getIssue());
-			mDefaultHandler.uncaughtException(reportItem.getThread(), reportItem.getThrowable());
-
-			return null;
-		}
-	}*/
 }

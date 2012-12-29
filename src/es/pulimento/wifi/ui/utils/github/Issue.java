@@ -7,6 +7,9 @@ import org.json.JSONStringer;
 
 public class Issue {
 
+	/**
+	 * 
+	 */
 	private String mTitle;
 	private String mBody;
 	private JSONArray mLabels;
@@ -69,4 +72,5 @@ public class Issue {
 		}
 		return null;
 	}
+
 }

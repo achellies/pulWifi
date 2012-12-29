@@ -172,8 +172,10 @@ public class SelectWirelessNetworkFragment extends ListFragment implements OnCli
 
 			// For testing networks...
 			if(BuildConfig.DEBUG) {
-				// mWirelessNetList.add(new WirelessNetwork("Andared", "AA:AA:AA:AA:AA:AA", 0,
-				// "[WPA]")); // ALGO: Andared KEY:
+				mWirelessNetList
+						.add(new WirelessNetwork("Andared", "AA:AA:AA:AA:AA:AA", 0, "[WPA]")); // ALGO:
+																							   // Andared
+																							   // KEY:
 				// 6b629f4c299371737494c61b5a101693a2d4e9e1f3e1320f3ebf9ae379cecf32
 				// mWirelessNetList.add(new WirelessNetwork("InfostradaWiFi-002560",
 				// "00:E0:4D:90:E1:E0", 0, "[WPA]")); // ALGO: Infostrada KEY: 200E04D90E1E0
