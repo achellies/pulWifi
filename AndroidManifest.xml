@@ -2,12 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="es.pulimento.wifi"
     android:installLocation="auto"
-    android:versionCode="133"
+    android:versionCode="134"
     android:versionName="@string/app_version" >
 
     <uses-sdk
         android:minSdkVersion="7"
-        android:targetSdkVersion="16" />
+        android:targetSdkVersion="17" />
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- ADMOB -->
     <uses-permission android:name="android.permission.INTERNET" /> <!-- ADMOB -->
