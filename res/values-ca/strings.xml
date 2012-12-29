@@ -76,7 +76,7 @@
     <string name="manualcrack_essid_hint">"Nom de la xarxa"</string>
     <string name="manualcrack_bottom">"Podeu veure una llista de les xarxes de suport amb la tecla de menú"</string>
     <string name="manualcrack_bssid_hint">"MAC Adress"</string>
-    <string name="manualcrack_crackbutton">"Crack"</string>
+    <string name="manualcrack_crackbutton">"OK"</string>
     <string name="manualcrack_inputerror">"Una mala entrada. Si us plau, mireu una llista completa de les xarxes de suport amb la tecla de menú."</string>
 
     <!-- Select wireless network activity -->

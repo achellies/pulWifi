@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.ManualFragment" >
+
+    <!--
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="6dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="4dp"
+        android:text="@string/manualcrack_header"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@android:color/black" />
+    -->
+
+    <com.google.ads.AdView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        ads:adSize="SMART_BANNER"
+        ads:adUnitId="a14de2ce2207597"
+        ads:loadAdOnCreate="true"
+        ads:testDevices="@string/admob_ads_test_devices" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/layout_manualmode_shadow"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:background="@color/layout_manualmode_shadow"
+            android:orientation="vertical"
+            android:padding="8dp" >
+
+            <EditText
+                android:id="@+id/layout_manualcrack_bssid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_text_holo_light"
+                android:hint="@string/manualcrack_bssid_hint"
+                android:imeOptions="actionNext"
+                android:nextFocusForward="@+id/layout_manualcrack_essid"
+                android:singleLine="true"
+                android:textColor="@android:color/black" >
+
+                <requestFocus />
+            </EditText>
+
+            <EditText
+                android:id="@+id/layout_manualcrack_essid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_text_holo_light"
+                android:hint="@string/manualcrack_essid_hint"
+                android:imeOptions="actionDone"
+                android:maxLength="17"
+                android:singleLine="true"
+                android:textColor="@android:color/black" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp" >
+
+                <TextView
+                    android:id="@+id/layout_manualcrack_security"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:text="Seguridad"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@android:color/black" />
+
+                <ToggleButton
+                    android:id="@+id/layout_manualcrack_togglebutton"
+                    android:layout_width="60dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/btn_toggle_red_matte_border"
+                    android:textColor="@android:color/white"
+                    android:textOff="WEP"
+                    android:textOn="WPA" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/layout_manualcrack_accept"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="4dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/manualcrack_crackbutton"
+            android:textColor="@android:color/white"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dip"
+        android:layout_marginRight="4dip"
+        android:layout_marginTop="8dip"
+        android:text="@string/manualcrack_bottom"
+        android:textColor="@color/layout_manualmode_secondary"
+        android:textSize="16sp" />
+
+</LinearLayout>

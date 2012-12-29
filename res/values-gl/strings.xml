@@ -72,7 +72,7 @@
     <string name="manualcrack_bottom">Podes ver unha lista de redes compatibles pulsando o botón menú</string>
     <string name="manualcrack_essid_hint">Nome de rede</string>
     <string name="manualcrack_bssid_hint">Dirección MAC</string>
-    <string name="manualcrack_crackbutton">Crackear</string>
+    <string name="manualcrack_crackbutton">OK</string>
     <string name="manualcrack_inputerror">Rede incompatible. Podes ver unha lista de redes compatibles pulsando o botón menú.</string>
 
     <!-- Select wireless network activity -->

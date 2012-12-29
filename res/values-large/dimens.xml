@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- PagerHeader -->
+    <dimen name="pager_header_height">40dp</dimen>
+    <dimen name="page_margin">20dp</dimen>
+
+    <!-- Show password activity -->
+    <dimen name="showpass_font_title">40sp</dimen>
+    <dimen name="showpass_font_content">36sp</dimen>
+    <dimen name="showpass_button_lateral_margin">50dp</dimen>
+    <dimen name="showpass_font_button_normal">32sp</dimen>
+    <dimen name="showpass_font_button_small">28sp</dimen>
+    <dimen name="showpass_button_height">90dp</dimen>
+    <dimen name="showpass_button_margintop">30dp</dimen>
+
+</resources>

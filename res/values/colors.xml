@@ -2,15 +2,20 @@
 <resources>
 
     <!-- Pager Header -->
-    <color name="pager_header_background_color">#FFF</color>
-    <color name="pager_header_active_text_color">#34B4E3</color>
-    <color name="pager_header_inactive_text_color">#000</color>
+    <color name="pager_header_background_color">#FFFFFF</color>
+    <color name="pager_header_active_text_color_ics">#34B4E3</color>
+    <color name="pager_header_active_text_color_green">#009900</color>
+    <color name="pager_header_active_text_color_red">#E00000</color>
+    <color name="pager_header_inactive_text_color">#000000</color>
 
     <!--  Own stuff -->
-    <color name="selectwireless_emptylist">#444</color>
+    <color name="selectwireless_emptylist">#444444</color>
+    <color name="layout_manualmode_shadow">#EEEEEE</color>
+    <color name="layout_manualmode_secondary">#333</color>
     
     <!-- Action Bar -->
-    <color name="actionbar_background">#EEE</color>
+    <color name="actionbar_background">#EEEEEE</color>
     <color name="actionbar_title_color">#224894</color>
+    <color name="actionbar_title_color_green">#00FC15</color>
 
 </resources>
