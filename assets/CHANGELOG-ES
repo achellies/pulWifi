@@ -1,6 +1,19 @@
 <!DOCTYPE html>
 <html lang="es">
 <body>
+	<h3>- v2.0.3</h3>
+	<ul>
+		<li>Posibilidad de escoger el idioma manualmente</li>
+		<li>Arreglados algunos fallos que provocaban forzar cierre</li>
+		<li>Retoques en la interfaz (mejor soporte para tablets, modo manual...</li>
+		<li>Arreglada la ordenación de redes</li>
+		<li>Pequeños cambios en los algoritmos</li>
+		<li>Añadido soporte para algunas redes Eircom</li>
+		<li>Mejorado de nuevo el sistema de reporte de errores, y el actualizador</li>
+		<li>Actualizadas librerías de terceras partes</li>
+		<li>Se has visto reducido el tamaño de la descarga del APK</li>		
+		<li>Otros cambios menores</li>
+	</ul>
 	<h3>- v2.0.2</h3>
 	<ul>
 		<li>Mejorado el sistema de reporte de errores</li>

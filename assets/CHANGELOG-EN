@@ -3,10 +3,11 @@
 <body>
 	<h3>- v2.0.3</h3>
 	<ul>
-		<li>Now can select app language manually</li>
-		<li>Added support for Eircom routers</li>
+		<li>Added ability to select app language manually</li>
+		<li>Fixed some errors that make app to force close</li>
+		<li>Added support for some Eircom routers</li>
 		<li>Little changes in algorithms</li>		
-		<li>Fixed ordering in networks list</li>
+		<li>Fix ordering in networks list</li>
 		<li>Layouts revised (especially for tablets)</li>
 		<li>Minor changes, bug fixes, updated libraries</li>
 		<li>Reduced APK size</li>
