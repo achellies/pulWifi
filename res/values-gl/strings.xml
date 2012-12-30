@@ -74,6 +74,7 @@
     <string name="manualcrack_bssid_hint">Dirección MAC</string>
     <string name="manualcrack_crackbutton">OK</string>
     <string name="manualcrack_inputerror">Rede incompatible. Podes ver unha lista de redes compatibles pulsando o botón menú.</string>
+    <string name="manualcrack_security">Seguridade</string>
 
     <!-- Select wireless network activity -->
     <string name="selectwireless_unsupported">Rede non soportada. As redes compatibles están marcadas ca cor verde.</string>

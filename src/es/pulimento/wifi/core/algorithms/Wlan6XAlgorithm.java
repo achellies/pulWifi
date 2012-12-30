@@ -21,6 +21,7 @@ package es.pulimento.wifi.core.algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import android.util.Log;
 import es.pulimento.wifi.BuildConfig;
@@ -59,7 +60,7 @@ public class Wlan6XAlgorithm extends CrackAlgorithm {
 
 	@Override
 	protected String crackAlgorithm(String essid_data, String bssid_data) {
-		bssid_data = bssid_data.toUpperCase();
+		bssid_data = bssid_data.toUpperCase(Locale.getDefault());
 
 		return crack2(essid_data, bssid_data);
 	}
@@ -119,7 +120,7 @@ public class Wlan6XAlgorithm extends CrackAlgorithm {
 					+ Integer.toHexString(eleventh & 0xf) + Integer.toHexString(twelfth & 0xf)
 					+ Integer.toHexString(thirteenth & 0xf);
 
-			passList.add(key.toUpperCase());
+			passList.add(key.toUpperCase(Locale.getDefault()));
 		}
 		StringBuilder s = new StringBuilder();
 		for(String sp : passList)

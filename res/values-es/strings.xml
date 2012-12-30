@@ -80,6 +80,7 @@
     <string name="manualcrack_bssid_hint">Dirección MAC</string>
     <string name="manualcrack_crackbutton">OK</string>
     <string name="manualcrack_inputerror">Red no soportada. Vea la lista completa en el menú</string>
+    <string name="manualcrack_security">Seguridad</string>
 
     <!-- Select wireless network activity -->
     <string name="selectwireless_unsupported">Red no soportada. Las redes soportadas están indicadas con marcadores verdes</string>

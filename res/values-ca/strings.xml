@@ -78,6 +78,7 @@
     <string name="manualcrack_bssid_hint">"MAC Adress"</string>
     <string name="manualcrack_crackbutton">"OK"</string>
     <string name="manualcrack_inputerror">"Una mala entrada. Si us plau, mireu una llista completa de les xarxes de suport amb la tecla de menú."</string>
+    <string name="manualcrack_security">Seguretat</string>
 
     <!-- Select wireless network activity -->
     <string name="selectwireless_unsupported">"La xarxa no compatible. Les xarxes de suport tenen marcadors de color verd."</string>

@@ -19,6 +19,8 @@
 
 package es.pulimento.wifi.core.algorithms;
 
+import java.util.Locale;
+
 import es.pulimento.wifi.core.WirelessNetwork.WirelessEncryption;
 
 /**
@@ -134,7 +136,7 @@ public class HuaweiAlgorithm extends CrackAlgorithm {
 	@Override
 	protected String crackAlgorithm(String essid_data, String bssid_data) {
 		// Remove dots from bssid and go lower case...
-		bssid_data = bssid_data.replace(":", "").toLowerCase();
+		bssid_data = bssid_data.replace(":", "").toLowerCase(Locale.getDefault());
 
 		int[] mac = new int[12];
 		for(int i = 0; i < 12; ++i)

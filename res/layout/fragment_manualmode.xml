@@ -61,7 +61,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:text="Seguridad"
+                android:text="@string/manualcrack_security"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@android:color/black" />
 
@@ -99,6 +99,7 @@
         android:textColor="@color/layout_manualmode_secondary"
         android:textSize="16sp" />
 
+    <!-- 
     <com.google.ads.AdView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -107,5 +108,7 @@
         ads:adUnitId="a14de2ce2207597"
         ads:loadAdOnCreate="true"
         ads:testDevices="@string/admob_ads_test_devices" />
+        
+        -->
 
 </LinearLayout>

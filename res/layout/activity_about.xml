@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
                 android:text="@string/app_name"
-                android:textSize="22dip" />
+                android:textSize="22sp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -43,7 +43,7 @@
                 android:layout_weight="0"
                 android:paddingLeft="5dip"
                 android:text="@string/app_version"
-                android:textSize="22dip" />
+                android:textSize="22sp" />
         </LinearLayout>
     </RelativeLayout>
 
@@ -65,7 +65,7 @@
             android:padding="4dip"
             android:longClickable="false"
             android:text="@string/dialog_about_text"
-            android:textSize="16dip" />
+            android:textSize="16sp" />
     </ScrollView>
 
     <LinearLayout

@@ -21,6 +21,7 @@ package es.pulimento.wifi.core;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 
 import es.pulimento.wifi.R;
 
@@ -131,7 +132,7 @@ public class WirelessNetwork implements Parcelable, Comparable<WirelessNetwork> 
 	 */
 	public WirelessNetwork(ScanResult s) {
 		mEssid = s.SSID;
-		mBssid = s.BSSID.toUpperCase();
+		mBssid = s.BSSID.toUpperCase(Locale.getDefault());
 		mPasswords = new ArrayList<String>();
 		mSignal = s.level;
 		mCapabilities = WirelessEncryption.parseEncription(s.capabilities);
@@ -153,7 +154,7 @@ public class WirelessNetwork implements Parcelable, Comparable<WirelessNetwork> 
 	 */
 	public WirelessNetwork(String ESSID, String BSSID, int signal, String capabilities) {
 		mEssid = ESSID;
-		mBssid = BSSID.toUpperCase();
+		mBssid = BSSID.toUpperCase(Locale.getDefault());
 		mPasswords = new ArrayList<String>();
 		mSignal = signal;
 		mCapabilities = WirelessEncryption.parseEncription(capabilities);

@@ -11,7 +11,7 @@
         android:id="@+id/menu_settings"
         android:icon="@drawable/ic_menu_preferences"
         android:orderInCategory="1"
-        android:showAsAction="always|withText"
+        android:showAsAction="ifRoom|withText"
         android:title="@string/menu_settings"/>
     <item
         android:id="@+id/menu_networks"

@@ -22,6 +22,7 @@ package es.pulimento.wifi.core.algorithms;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Locale;
 
 import es.pulimento.wifi.core.WirelessNetwork.WirelessEncryption;
 
@@ -78,8 +79,8 @@ public class ComtrendAlgorithm extends CrackAlgorithm {
 
 	@Override
 	protected String crackAlgorithm(String essid_data, String bssid_data) {
-		bssid_data = bssid_data.replace(":", "").toUpperCase();
-		essid_data = essid_data.toUpperCase();
+		bssid_data = bssid_data.replace(":", "").toUpperCase(Locale.getDefault());
+		essid_data = essid_data.toUpperCase(Locale.getDefault());
 		return MD5Hash("bcgbghgg" + bssid_data.substring(0, 8)
 				+ essid_data.substring(essid_data.length() - 4, essid_data.length()) + bssid_data);
 	}

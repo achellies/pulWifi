@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:singleLine="true"
             android:textColor="@android:color/black"
-            android:textSize="18dip"
+            android:textSize="18sp"
             android:textStyle="bold"
             android:typeface="sans" />
 
@@ -33,7 +33,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textColor="@android:color/black"
-            android:textSize="16dp" />
+            android:textSize="16sp" />
     </LinearLayout>
 
     <ImageView

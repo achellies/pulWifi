@@ -261,6 +261,7 @@ class NetworkListAdapter implements ListAdapter {
 		return mItems.get(position);
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 

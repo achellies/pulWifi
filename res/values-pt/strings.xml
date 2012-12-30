@@ -78,6 +78,7 @@
     <string name="manualcrack_bssid_hint">"Endereço MAC"</string>
     <string name="manualcrack_crackbutton">"OK"</string>
     <string name="manualcrack_inputerror">"Rede não é suportada. Veja a lista completa no menu"</string>
+    <string name="manualcrack_security">Segurança</string>
 
     <!-- Select wireless network activity -->
     <string name="selectwireless_unsupported">"Rede não é suportada. As redes suportadas são indicadas com marcadores verdes"</string>

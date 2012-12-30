@@ -35,9 +35,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 import es.pulimento.wifi.R;
 
-@SuppressWarnings("deprecation")
 public class ClipboardCopyDialog extends Dialog implements OnItemClickListener {
 
+	@SuppressWarnings("deprecation")
 	private ClipboardManager mClipboardManager;
 	private ArrayList<String> mPasswords;
 	private Context mContext;

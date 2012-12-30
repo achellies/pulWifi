@@ -57,8 +57,8 @@ public class Preferences extends SherlockPreferenceActivity {
 	/* Preference */
 	private Preference mApkVersion = null;
 
-	@Override
 	@SuppressWarnings("deprecation")
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);

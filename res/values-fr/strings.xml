@@ -78,6 +78,7 @@
     <string name="manualcrack_bssid_hint">"MAC Adresse"</string>
     <string name="manualcrack_crackbutton">"OK"</string>
     <string name="manualcrack_inputerror">"Entrée Bad. S'il vous plaît voir la liste complète des réseaux soutenus appuyant sur la touche menu."</string>
+    <string name="manualcrack_security">Sécurité</string>
 
     <!-- Select wireless network activity -->
     <string name="selectwireless_unsupported">"Réseau non pris en charge. Réseaux pris en charge ont obtenu des marqueurs verts."</string>

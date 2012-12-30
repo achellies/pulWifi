@@ -22,6 +22,7 @@ package es.pulimento.wifi.core.algorithms;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Locale;
 
 import es.pulimento.wifi.core.WirelessNetwork.WirelessEncryption;
 
@@ -58,7 +59,7 @@ public class EircomAlgorithm extends CrackAlgorithm {
 	@Override
 	protected String crackAlgorithm(String essid_data, String bssid_data) {
 		// Remove separators, put in lowercase, get last three octals
-		String mac = bssid_data.replace(":", "").toLowerCase().substring(6);
+		String mac = bssid_data.replace(":", "").toLowerCase(Locale.getDefault()).substring(6);
 		try {
 			md = MessageDigest.getInstance("SHA1");
 		} catch (NoSuchAlgorithmException e1) {
