@@ -12,6 +12,7 @@
     <color name="selectwireless_emptylist">#444444</color>
     <color name="layout_manualmode_shadow">#EEEEEE</color>
     <color name="layout_manualmode_secondary">#333</color>
+    <color name="transparent">#000F</color>
     
     <!-- Action Bar -->
     <color name="actionbar_background">#EEEEEE</color>

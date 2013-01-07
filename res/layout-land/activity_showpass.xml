@@ -73,15 +73,16 @@
         </LinearLayout>
     </ScrollView>
 
+    <!-- 
     <FrameLayout
         android:id="@+id/ads"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_alignParentBottom="true"
         android:background="#278472" >
-    </FrameLayout>
+    </FrameLayout>    
+    -->
 
-    <!--
     <com.google.ads.AdView
         android:id="@+id/ads"
         android:layout_width="wrap_content"
@@ -91,6 +92,5 @@
         ads:adUnitId="a14de2ce2207597"
         ads:loadAdOnCreate="true"
         ads:testDevices="@string/admob_ads_test_devices" />
-    -->
 
 </RelativeLayout>

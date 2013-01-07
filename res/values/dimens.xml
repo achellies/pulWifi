@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Dimensions - DEFAULT -->
 <resources>
 
     <!-- PagerHeader -->
@@ -13,5 +14,12 @@
     <dimen name="showpass_font_button_small">22sp</dimen>
     <dimen name="showpass_button_height">70dp</dimen>
     <dimen name="showpass_button_margintop">12dp</dimen>
+
+    <!-- About activity, landscape -->
+    <dimen name="about_icon_size">80dp</dimen>
+    <dimen name="about_font_appname">18sp</dimen>
+    <dimen name="about_button_margintop">8dp</dimen>
+    <dimen name="about_topleftportion_margintop">10dp</dimen>
+    <dimen name="about_topleftportion_marginbottom">10dp</dimen>
 
 </resources>
