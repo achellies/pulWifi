@@ -10,9 +10,9 @@
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginBottom="@dimen/manual_port_toptext_marginbottom"
+        android:layout_marginLeft="@dimen/manual_port_toptext_marginleft"
+        android:layout_marginTop="@dimen/manual_port_toptext_margintop"
         android:text="@string/manualcrack_header"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="@android:color/black" />
@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:background="@color/layout_manualmode_shadow"
         android:orientation="vertical"
-        android:padding="18dp" >
+        android:padding="@dimen/manual_port_editbox_padding" >
 
         <EditText
             android:id="@+id/layout_manualcrack_bssid"
@@ -52,23 +52,23 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp" >
+            android:layout_marginTop="@dimen/manual_port_editbox_linearlayout_margintop" >
 
             <TextView
                 android:id="@+id/layout_manualcrack_security"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
+                android:layout_marginLeft="@dimen/manual_port_editbox_security_marginleft"
+                android:layout_marginRight="@dimen/manual_port_editbox_security_marginright"
                 android:text="@string/manualcrack_security"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@android:color/black" />
 
             <ToggleButton
                 android:id="@+id/layout_manualcrack_togglebutton"
-                android:layout_width="56dp"
-                android:layout_height="38dp"
+                android:layout_width="@dimen/manual_port_editbox_togglebutton_width"
+                android:layout_height="@dimen/manual_port_editbox_togglebutton_height"
                 android:layout_gravity="center"
                 android:background="@drawable/btn_toggle_red_matte_border"
                 android:textColor="@android:color/white"
@@ -79,36 +79,42 @@
 
     <Button
         android:id="@+id/layout_manualcrack_accept"
-        android:layout_width="90dp"
-        android:layout_height="60dp"
+        android:layout_width="@dimen/manual_port_button_ok_width"
+        android:layout_height="@dimen/manual_port_button_ok_height"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="@dimen/manual_port_button_ok_margintop"
         android:gravity="center"
         android:text="@string/manualcrack_crackbutton"
         android:textColor="@android:color/white"
-        android:textSize="24sp"
+        android:textSize="@dimen/manual_port_button_ok_font"
         android:textStyle="bold" />
 
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dip"
-        android:layout_marginRight="4dip"
-        android:layout_marginTop="10dip"
+        android:layout_marginLeft="@dimen/manual_port_bottomtext_margin_left"
+        android:layout_marginRight="@dimen/manual_port_bottomtext_margin_right"
+        android:layout_marginTop="@dimen/manual_port_bottomtext_margin_top"
         android:text="@string/manualcrack_bottom"
         android:textColor="@color/layout_manualmode_secondary"
-        android:textSize="16sp" />
+        android:textSize="@dimen/manual_port_bottomtext_font" />
 
-    <!-- 
+    <!--
+    <FrameLayout
+        android:layout_width="480px"
+        android:layout_height="75px"
+        android:layout_marginTop="@dimen/manual_port_ads_margintop"
+        android:background="#452357" >
+    </FrameLayout>
+    -->
+
     <com.google.ads.AdView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/manual_port_ads_margintop"
         ads:adSize="SMART_BANNER"
         ads:adUnitId="a14de2ce2207597"
         ads:loadAdOnCreate="true"
         ads:testDevices="@string/admob_ads_test_devices" />
-        
-        -->
 
 </LinearLayout>

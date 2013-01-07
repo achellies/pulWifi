@@ -22,4 +22,25 @@
     <dimen name="about_topleftportion_margintop">30dp</dimen>
     <dimen name="about_topleftportion_marginbottom">20dp</dimen>
 
+    <!-- Manual mode fragment, portrait -->
+    <dimen name="manual_port_toptext_margintop">50dp</dimen>
+    <dimen name="manual_port_toptext_marginbottom">20dp</dimen>
+    <dimen name="manual_port_toptext_marginleft">20dp</dimen>
+    <dimen name="manual_port_toptext_marginright">20dp</dimen>
+    <dimen name="manual_port_editbox_padding">100dp</dimen>
+    <dimen name="manual_port_editbox_linearlayout_margintop">40dp</dimen>
+    <dimen name="manual_port_editbox_security_marginleft">20dp</dimen>
+    <dimen name="manual_port_editbox_security_marginright">20dp</dimen>
+    <dimen name="manual_port_editbox_togglebutton_height">40dp</dimen>
+    <dimen name="manual_port_editbox_togglebutton_width">60dp</dimen>
+    <dimen name="manual_port_button_ok_width">120dp</dimen>
+    <dimen name="manual_port_button_ok_height">70dp</dimen>
+    <dimen name="manual_port_button_ok_margintop">40dp</dimen>
+    <dimen name="manual_port_button_ok_font">26sp</dimen>
+    <dimen name="manual_port_bottomtext_font">20sp</dimen>
+    <dimen name="manual_port_bottomtext_margin_right">20dp</dimen>
+    <dimen name="manual_port_bottomtext_margin_left">20dp</dimen>
+    <dimen name="manual_port_bottomtext_margin_top">40dp</dimen>
+    <dimen name="manual_port_ads_margintop">50dp</dimen>
+
 </resources>
