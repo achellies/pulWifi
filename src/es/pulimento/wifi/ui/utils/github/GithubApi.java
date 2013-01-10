@@ -19,8 +19,9 @@ import org.json.JSONException;
 public class GithubApi {
 
 	// Constants...
-	private static String BASEURL = "https://api.github.com/repos/pulWifi/pulWifi/";
-
+	private final static String URL_ISSUES = "https://api.github.com/repos/pulWifi/pulWifi/issues";
+	private final static String URL_DOWNLOADS = "http://pulwifi.github.com/v2/downloads/downloads.json";
+	
 	// Variables...
 	private Boolean mAuthed;
 	private String mToken;
@@ -36,7 +37,7 @@ public class GithubApi {
 
 	public Download getLastDownload() {
 		try {
-			URL url = new URL(BASEURL + "downloads");
+			URL url = new URL(URL_DOWNLOADS);
 			BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
 			StringBuilder sb = new StringBuilder();
 			String s;
@@ -62,7 +63,7 @@ public class GithubApi {
 
 		// Get the list of issues...
 		try {
-			URL url = new URL(BASEURL + "issues");
+			URL url = new URL(URL_ISSUES);
 			BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
 			StringBuilder sb = new StringBuilder();
 			String s;
@@ -91,7 +92,7 @@ public class GithubApi {
 		if(!mAuthed)		
 			return;
 		
-		HttpPost httpPost = new HttpPost(BASEURL + "issues");
+		HttpPost httpPost = new HttpPost(URL_ISSUES);
 		httpPost.setHeader("Authorization", "token " + mToken);
 		httpPost.setHeader("Content-Type", "application/json");
 		try {

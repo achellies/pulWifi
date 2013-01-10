@@ -10,8 +10,8 @@ public class Download {
 
 	public Download(JSONObject j) {
 		try {
-			mUrl = j.getString("html_url");
-			mVersion = j.getString("description");
+			mUrl = j.getString("url");
+			mVersion = j.getString("version");
 		} catch (JSONException e) {
 			// Should not happen...
 		}
