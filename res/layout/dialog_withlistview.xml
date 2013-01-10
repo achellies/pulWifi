@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="fill_parent"
+    android:gravity="center"
+    android:minWidth="200dp"
+    android:orientation="vertical"
+    android:padding="8dp" >
+
+    <!--
+     Sometimes Android use black fonts, other white ones, set background to intermediate grey
+     to maximize compatibility
+    -->
+
+    <ListView
+        android:id="@+id/dialog_withlistview_list"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#777"
+        android:footerDividersEnabled="false"
+        android:gravity="center"
+        android:headerDividersEnabled="false" />
+
+</LinearLayout>

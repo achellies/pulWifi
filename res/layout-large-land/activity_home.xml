@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <com.google.ads.AdView
+        android:id="@+id/ad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        ads:adSize="SMART_BANNER"
+        ads:adUnitId="a14de2ce2207597"
+        ads:loadAdOnCreate="true"
+        ads:testDevices="@string/admob_ads_test_devices" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/fragment_bottom"
+        android:layout_below="@+id/ad" >
+
+        <fragment
+            android:id="@+id/fragment_left"
+            android:name="es.pulimento.wifi.ui.SelectWirelessNetworkFragment"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1.6" />
+
+        <FrameLayout
+            android:layout_width="3dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:background="#8cc01a" >
+        </FrameLayout>
+
+        <fragment
+            android:id="@+id/fragment_right"
+            android:name="es.pulimento.wifi.ui.ManualFragment"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <fragment
+        android:id="@+id/fragment_bottom"
+        android:name="es.pulimento.wifi.ui.BottomFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" />
+
+</RelativeLayout>

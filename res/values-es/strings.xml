@@ -39,9 +39,12 @@
     <string name="dialog_updater_positive">Si</string>
     <string name="dialog_updater_negative">No</string>
     <string name="dialog_updater_checking">Comprobando…</string>
+    <string name="dialog_updater_error">Error obteniendo la última versión</string>
+    <string name="dialog_updater_last">Tienes la última versión disponible</string>
 
     <!-- Preference keys and defaults -->
     <!-- Really not neccesary here, they are language-independent -->
+
 
     <!-- Preferences -->
     <string name="preferences_category_scanmode">BUSCAR REDES</string>
@@ -58,6 +61,8 @@
     <string name="preferences_about_summary">Acerca de esta versión</string>
     <string name="preferences_updater_summary">Buscar actualizaciones manualmente</string>
     <string name="preferences_updater_title">Actualizador</string>
+    <string name="preferences_localechooser_title">Seleccionar idioma</string>
+    <string name="preferences_localechooser_summary">Requiere reiniciar</string>
 
     <!-- Main activity -->
     <string name="mainactivity_failed_dialog_error">Error</string>
@@ -75,6 +80,7 @@
     <string name="manualcrack_bssid_hint">Dirección MAC</string>
     <string name="manualcrack_crackbutton">OK</string>
     <string name="manualcrack_inputerror">Red no soportada. Vea la lista completa en el menú</string>
+    <string name="manualcrack_security">Seguridad</string>
 
     <!-- Select wireless network activity -->
     <string name="selectwireless_unsupported">Red no soportada. Las redes soportadas están indicadas con marcadores verdes</string>

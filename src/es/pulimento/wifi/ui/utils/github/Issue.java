@@ -7,6 +7,9 @@ import org.json.JSONStringer;
 
 public class Issue {
 
+	/**
+	 * 
+	 */
 	private String mTitle;
 	private String mBody;
 	private JSONArray mLabels;
@@ -26,11 +29,14 @@ public class Issue {
 		}
 	}
 
-	public Issue(String title, String body, String label) {
+	public Issue(String title, String body, String... label) {
 		mTitle = title;
 		mBody = body;
 		mLabels = new JSONArray();
-		mLabels.put(label);
+		mLabels.put(label[0]);
+		// Multiple tags
+		if(label[1] != null)
+			mLabels.put(label[1]);
 	}
 
 	public String getTitle() {
@@ -59,20 +65,12 @@ public class Issue {
 
 	public String toJSONString() {
 		try {
-			return
-				new JSONStringer()
-					.object()
-						.key("title")
-						.value(mTitle)
-						.key("body")
-						.value(mBody)
-						.key("labels")
-						.value(mLabels)
-					.endObject()
-				.toString();
+			return new JSONStringer().object().key("title").value(mTitle).key("body").value(mBody)
+					.key("labels").value(mLabels).endObject().toString();
 		} catch (JSONException e) {
 			// Should not happen...
 		}
 		return null;
 	}
+
 }

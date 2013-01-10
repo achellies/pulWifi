@@ -39,31 +39,35 @@ public class ManualFragment extends Fragment implements OnClickListener {
 	private EditText mEditTextEssid;
 	private Button mButtonAccept;
 	private ToggleButton mToggleButton;
+	int i = 0;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		/* create view and return it */
-		View inflatedView = inflater.inflate(R.layout.layout_manualfragment, container, false);
+		View inflatedView = inflater.inflate(R.layout.fragment_manualmode, container, false);
 		mEditTextEssid = (EditText) inflatedView.findViewById(R.id.layout_manualcrack_essid);
 		mEditTextBssid = (EditText) inflatedView.findViewById(R.id.layout_manualcrack_bssid);
 		mButtonAccept = (Button) inflatedView.findViewById(R.id.layout_manualcrack_accept);
-		mToggleButton = (ToggleButton) inflatedView.findViewById(R.id.layout_manualcrack_togglebutton);
+		mToggleButton = (ToggleButton) inflatedView
+				.findViewById(R.id.layout_manualcrack_togglebutton);
 		return inflatedView;
 	}
 
 	@Override
 	public void onStart() {
 		super.onStart();
-
 		mButtonAccept.setOnClickListener(this);
 	}
 
 	@Override
 	public void onClick(View v) {
-		String capabilities = (String) (mToggleButton.isChecked() ? mToggleButton.getTextOn() : mToggleButton.getTextOff());
-		WirelessNetwork mWirelessNetwork = new WirelessNetwork(mEditTextEssid.getText().toString(), mEditTextBssid.getText().toString(), 1, capabilities);
-		if (!mWirelessNetwork.isCrackeable()) {
-			Toast.makeText(getActivity().getApplicationContext(), R.string.manualcrack_inputerror, Toast.LENGTH_LONG).show();
+		String capabilities = (String) (mToggleButton.isChecked() ? mToggleButton.getTextOn()
+				: mToggleButton.getTextOff());
+		WirelessNetwork mWirelessNetwork = new WirelessNetwork(mEditTextEssid.getText().toString(),
+				mEditTextBssid.getText().toString(), 1, capabilities);
+		if(!mWirelessNetwork.isCrackeable()) {
+			Toast.makeText(getActivity().getApplicationContext(), R.string.manualcrack_inputerror,
+					Toast.LENGTH_LONG).show();
 			return;
 		}
 		mWirelessNetwork.crack();
@@ -73,4 +77,5 @@ public class ManualFragment extends Fragment implements OnClickListener {
 		startActivity(i);
 		return;
 	}
+
 }

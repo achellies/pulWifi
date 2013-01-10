@@ -40,6 +40,7 @@ public class SupportedNetworksDialog extends Dialog {
 		this.setContentView(R.layout.dialog_generic);
 		this.setTitle(R.string.dialog_supportednetworks_title);
 
-		((WebView) findViewById(R.id.dialog_generic_webview)).loadUrl(mContext.getString(R.string.dialog_supportednetworks_file_url));
+		((WebView) findViewById(R.id.dialog_generic_webview)).loadUrl(mContext
+				.getString(R.string.dialog_supportednetworks_file_url));
 	}
 }

@@ -37,6 +37,8 @@
     <!-- TO-DO <string name="dialog_updater_message>Hay una nueva actualización, descargarla?? -->
     <string name="dialog_updater_positive">Si</string>
     <string name="dialog_updater_negative">Non</string>
+    <string name="dialog_updater_error">Erro comprobación de actualizacións</string>
+    <string name="dialog_updater_last">Ti ten a última versión dispoñible</string>
 
     <!-- Preferences -->
     <string name="preferences_category_scanmode">MODO AUTOMÁTICO</string>
@@ -53,6 +55,8 @@
     <string name="preferences_about_summary">Sobre este lanzamento</string>
     <string name="preferences_updater_summary">Comprobar se hai actualizacións manualmente</string>
     <string name="preferences_updater_title">Actualizar</string>
+    <string name="preferences_localechooser_title">Escolla o idioma</string>
+    <string name="preferences_localechooser_summary">É necesario reiniciar</string>
 
     <!-- Main activity -->
     <string name="mainactivity_failed_dialog_error">Error</string>
@@ -68,8 +72,9 @@
     <string name="manualcrack_bottom">Podes ver unha lista de redes compatibles pulsando o botón menú</string>
     <string name="manualcrack_essid_hint">Nome de rede</string>
     <string name="manualcrack_bssid_hint">Dirección MAC</string>
-    <string name="manualcrack_crackbutton">Crackear</string>
+    <string name="manualcrack_crackbutton">OK</string>
     <string name="manualcrack_inputerror">Rede incompatible. Podes ver unha lista de redes compatibles pulsando o botón menú.</string>
+    <string name="manualcrack_security">Seguridade</string>
 
     <!-- Select wireless network activity -->
     <string name="selectwireless_unsupported">Rede non soportada. As redes compatibles están marcadas ca cor verde.</string>

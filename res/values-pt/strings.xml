@@ -37,13 +37,15 @@
     <string name="dialog_updater_checking">"Verificando…"</string>
     <string name="dialog_updater_positive">"Sim"</string>
     <string name="dialog_updater_negative">"Nao"</string>
+    <string name="dialog_updater_error">Erro verificação de atualizações</string>
+    <string name="dialog_updater_last">Você tem a última versão disponível</string>
 
     <!-- Preference keys and defaults -->
     <!-- Really not neccesary here, they are language-independent -->
 
 
     <!-- Preferences -->
-    <string name="preferences_category_scanmode">"Rede de pesquisa"</string>
+    <string name="preferences_category_scanmode">"REDE DE PESQUISA"</string>
     <string name="preferences_autoupdate_title">"Atualizar automaticamente"</string>
     <string name="preferences_autoupdate_summary">"Atualizar lista de redes automaticamente"</string>
     <string name="preferences_vibrateupdate_title">"Vibrar com cada atualização"</string>
@@ -53,10 +55,12 @@
     <string name="preferences_updateinterval_fast">"Rápido"</string>
     <string name="preferences_updateinterval_normal">"Normal"</string>
     <string name="preferences_updateinterval_slow">"Devagar"</string>
-    <string name="preferences_category_info">"General.."</string>
+    <string name="preferences_category_info">"GENERAL"</string>
     <string name="preferences_about_summary">"Sobre este Lançamento"</string>
     <string name="preferences_updater_summary">Verificar se há atualizações manualmente</string>
     <string name="preferences_updater_title">Updater</string>
+    <string name="preferences_localechooser_title">Escolha o idioma</string>
+    <string name="preferences_localechooser_summary">É necessário reiniciar</string>
 
     <!-- Main activity -->
     <string name="mainactivity_failed_dialog_error">"Erro"</string>
@@ -74,6 +78,7 @@
     <string name="manualcrack_bssid_hint">"Endereço MAC"</string>
     <string name="manualcrack_crackbutton">"OK"</string>
     <string name="manualcrack_inputerror">"Rede não é suportada. Veja a lista completa no menu"</string>
+    <string name="manualcrack_security">Segurança</string>
 
     <!-- Select wireless network activity -->
     <string name="selectwireless_unsupported">"Rede não é suportada. As redes suportadas são indicadas com marcadores verdes"</string>

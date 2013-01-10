@@ -22,6 +22,7 @@ package es.pulimento.wifi.core.algorithms;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Locale;
 
 import es.pulimento.wifi.core.WirelessNetwork.WirelessEncryption;
 
@@ -60,15 +61,19 @@ public class ZyxelAlgorithm extends CrackAlgorithm {
 
 	@Override
 	protected String crackAlgorithm(String essid_data, String bssid_data) {
-		essid_data = essid_data.toUpperCase();
-		bssid_data = bssid_data.replace(":", "").toUpperCase();
-		return MD5Hash(bssid_data.substring(0, 8).toLowerCase() + essid_data.substring(essid_data.length() - 4, essid_data.length()).toLowerCase()).toUpperCase();
+		essid_data = essid_data.toUpperCase(Locale.getDefault());
+		bssid_data = bssid_data.replace(":", "").toUpperCase(Locale.getDefault());
+		return MD5Hash(
+				bssid_data.substring(0, 8).toLowerCase(Locale.getDefault())
+						+ essid_data.substring(essid_data.length() - 4, essid_data.length())
+								.toLowerCase()).toUpperCase(Locale.getDefault());
 	}
 
 	private static String MD5Hash(String input) {
 		try {
-			String hashtext = (new BigInteger(1, MessageDigest.getInstance("MD5").digest(input.getBytes()))).toString(16);
-			while (hashtext.length() < 20)
+			String hashtext = (new BigInteger(1, MessageDigest.getInstance("MD5").digest(
+					input.getBytes()))).toString(16);
+			while(hashtext.length() < 20)
 				hashtext = "0" + hashtext;
 			return hashtext.substring(0, 20);
 		} catch (NoSuchAlgorithmException e) {

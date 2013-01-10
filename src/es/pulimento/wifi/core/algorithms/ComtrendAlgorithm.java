@@ -22,6 +22,7 @@ package es.pulimento.wifi.core.algorithms;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Locale;
 
 import es.pulimento.wifi.core.WirelessNetwork.WirelessEncryption;
 
@@ -65,31 +66,33 @@ public class ComtrendAlgorithm extends CrackAlgorithm {
 		// ESSID: WLAN_XXXX / JAZZTEL_XXXX
 		// BSSID: 00:23:F8:XX:XX:XX
 		addPattern("(?:WLAN|JAZZTEL)_([0-9a-fA-F]{4})", "(00:23:F8:[0-9A-Fa-f:]{8})");
-		
+
 		// ESSID : WLAN_XXXX
 		// BSSID : 38:72:C0:XX:XX:XX
 		addPattern("WLAN_([0-9a-fA-F]{4})", "(38:72:C0:[0-9A-Fa-f:]{8})");
-		
+
 		// Added all macs until version 3 which will be focused on this.
 		addPattern("(?:WLAN|JAZZTEL)_([0-9a-fA-F]{4})", "(30:39:F2:[0-9A-Fa-f:]{8})");
-		//addPattern("(?:WLAN|JAZZTEL)_([0-9a-fA-F]{4})", "(00:1A:2B:[0-9A-Fa-f:]{8})");//256 keys!!
+		// addPattern("(?:WLAN|JAZZTEL)_([0-9a-fA-F]{4})", "(00:1A:2B:[0-9A-Fa-f:]{8})");//256
+		// keys!!
 	}
 
 	@Override
 	protected String crackAlgorithm(String essid_data, String bssid_data) {
-		bssid_data = bssid_data.replace(":", "").toUpperCase();
-		essid_data = essid_data.toUpperCase();
-   		return MD5Hash("bcgbghgg"+bssid_data.substring(0,8)+essid_data.substring(essid_data.length()-4,essid_data.length())+bssid_data);
+		bssid_data = bssid_data.replace(":", "").toUpperCase(Locale.getDefault());
+		essid_data = essid_data.toUpperCase(Locale.getDefault());
+		return MD5Hash("bcgbghgg" + bssid_data.substring(0, 8)
+				+ essid_data.substring(essid_data.length() - 4, essid_data.length()) + bssid_data);
 	}
 
 	private static String MD5Hash(String input) {
 		try {
-			String hashtext = (new BigInteger(1, MessageDigest.getInstance("MD5").digest(input.getBytes()))).toString(16);
-			while (hashtext.length() < 20)
+			String hashtext = (new BigInteger(1, MessageDigest.getInstance("MD5").digest(
+					input.getBytes()))).toString(16);
+			while(hashtext.length() < 20)
 				hashtext = "0" + hashtext;
 			return hashtext.substring(0, 20);
-		}
-		catch(NoSuchAlgorithmException e) {
+		} catch (NoSuchAlgorithmException e) {
 			throw new RuntimeException(e);
 		}
 	}

@@ -34,10 +34,8 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 
 import es.pulimento.wifi.R;
-import es.pulimento.wifi.ui.utils.ExceptionHandler;
+import es.pulimento.wifi.ui.utils.Constants;
 import es.pulimento.wifi.ui.utils.UpdateChecker;
-
-
 
 public class Preferences extends SherlockPreferenceActivity {
 
@@ -48,21 +46,20 @@ public class Preferences extends SherlockPreferenceActivity {
 	public final static String PREFERENCES_AUTOUPDATE_KEY = "prefs_key_autoupdate";
 	public final static String PREFERENCES_VIBRATEUPDATE_KEY = "prefs_key_vibrateupdate";
 	public final static String PREFERENCES_UPDATEINTERVAL_KEY = "prefs_key_updateinterval";
+	public final static String PREFERENCES_LOCALECHOOSER_KEY = "prefs_key_localechooser";
 
 	/* Preference default values. */
 	public final static boolean PREFERENCES_AUTOUPDATE_DEFAULT = true;
 	public final static boolean PREFERENCES_VIBRATEUPDATE_DEFAULT = false;
 	public final static String PREFERENCES_UPDATEINTERVAL_DEFAULT = "2000";
+	public final static String PREFERENCES_LOCALECHOOSER_DEFAULT = "";
 
 	/* Preference */
 	private Preference mApkVersion = null;
 
-	@Override
 	@SuppressWarnings("deprecation")
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-
-		/* Set exception handler... */
-		Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler());
 
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.preferences);
@@ -80,11 +77,11 @@ public class Preferences extends SherlockPreferenceActivity {
 	@Override
 	public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
 		String pref = preference.getKey();
-		if (pref.equals(getString(R.string.preferences_updater_key))) {
-			new UpdateChecker(this, null).work();
+		if(pref.equals(getString(R.string.preferences_updater_key))) {
+			new UpdateChecker(this,false).work();
 			return true;
 		}
-		if (pref.equals(getString(R.string.preferences_about_key))) {
+		if(pref.equals(getString(R.string.preferences_about_key))) {
 			Intent intent = new Intent(Preferences.this, AboutActivity.class);
 			intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
 			startActivity(intent);
@@ -100,21 +97,23 @@ public class Preferences extends SherlockPreferenceActivity {
 		@Override
 		protected Integer doInBackground(Void... params) {
 			try {
-				PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_META_DATA);
+				PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(),
+						PackageManager.GET_META_DATA);
 				apkVersion = pInfo.versionName;
 				apkVersionCode = pInfo.versionCode;
 			} catch (NameNotFoundException e) {
-				Log.e("pulWifi", "Superuser is not installed?", e);
+				Log.e(Constants.TAG, "pulWifi is not installed?", e);
 			}
 			return 0;
 		}
 
 		@Override
 		protected void onPostExecute(Integer result) {
-			mApkVersion.setTitle(getString(R.string.preferences_about_title, apkVersion, apkVersionCode));
+			mApkVersion.setTitle(getString(R.string.preferences_about_title, apkVersion,
+					apkVersionCode));
 		}
 	}
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getSupportMenuInflater().inflate(R.menu.menu_preferences, menu);
@@ -123,7 +122,7 @@ public class Preferences extends SherlockPreferenceActivity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
+		switch(item.getItemId()) {
 			case R.id.menu_preferences_back:
 				this.finish();
 				break;

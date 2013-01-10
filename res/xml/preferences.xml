@@ -7,15 +7,14 @@
             android:key="@string/preferences_autoupdate_key"
             android:summary="@string/preferences_autoupdate_summary"
             android:title="@string/preferences_autoupdate_title"
-            android:widgetLayout="@layout/checkbox_jb" />
+            android:widgetLayout="@layout/checkbox_jellybean" />
         <CheckBoxPreference
             android:defaultValue="@string/preferences_vibrateupdate_default"
             android:dependency="@string/preferences_autoupdate_key"
             android:key="@string/preferences_vibrateupdate_key"
             android:summary="@string/preferences_vibrateupdate_summary"
             android:title="@string/preferences_vibrateupdate_title"
-            android:widgetLayout="@layout/checkbox_jb" />
-
+            android:widgetLayout="@layout/checkbox_jellybean" />
         <ListPreference
             android:defaultValue="@string/preferences_updateinterval_default"
             android:entries="@array/preferences_updateintervals_names"
@@ -23,9 +22,16 @@
             android:key="@string/preferences_updateinterval_key"
             android:summary="@string/preferences_updateinterval_summary"
             android:title="@string/preferences_updateinterval_title"
-            android:widgetLayout="@layout/listpreference_jb" />
+            android:widgetLayout="@layout/listpreference_jellybean" />
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/preferences_category_info" >
+        <ListPreference
+            android:defaultValue="@string/preferences_localechooser_default"
+            android:entries="@array/preferences_localechooser_names"
+            android:entryValues="@array/preferences_localechooser_values"
+            android:key="@string/preferences_localechooser_key"
+            android:summary="@string/preferences_localechooser_summary"
+            android:title="@string/preferences_localechooser_title" />
         <Preference
             android:key="@string/preferences_updater_key"
             android:summary="@string/preferences_updater_summary"

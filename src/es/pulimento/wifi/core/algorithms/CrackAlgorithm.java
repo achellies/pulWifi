@@ -50,7 +50,7 @@ public abstract class CrackAlgorithm {
 
 		n_of_patterns = patterns.size();
 
-		for(int i = 0; i < n_of_patterns; i+=2) {
+		for(int i = 0; i < n_of_patterns; i += 2) {
 			matchers.add(Pattern.compile(patterns.get(i)).matcher(essid));
 			matchers.add(Pattern.compile(patterns.get(i + 1)).matcher(bssid));
 		}
@@ -83,7 +83,12 @@ public abstract class CrackAlgorithm {
 	 */
 	public String crack() {
 		if(working_pattern != -1) {
-			return crackAlgorithm(matchers.get(working_pattern).group(1), matchers.get(working_pattern+1).group(1));
+			if(!(this instanceof EircomAlgorithm))
+				return crackAlgorithm(matchers.get(working_pattern).group(1),
+						matchers.get(working_pattern + 1).group(1));
+			else
+				return crackAlgorithm(matchers.get(working_pattern).group(0),
+						matchers.get(working_pattern + 1).group(0));
 		} else if(isCrackeable()) {
 			return crack();
 		}

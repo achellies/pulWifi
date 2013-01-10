@@ -21,6 +21,7 @@ package es.pulimento.wifi.core;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 
 import es.pulimento.wifi.R;
 
@@ -131,7 +132,7 @@ public class WirelessNetwork implements Parcelable, Comparable<WirelessNetwork> 
 	 */
 	public WirelessNetwork(ScanResult s) {
 		mEssid = s.SSID;
-		mBssid = s.BSSID.toUpperCase();
+		mBssid = s.BSSID.toUpperCase(Locale.getDefault());
 		mPasswords = new ArrayList<String>();
 		mSignal = s.level;
 		mCapabilities = WirelessEncryption.parseEncription(s.capabilities);
@@ -153,7 +154,7 @@ public class WirelessNetwork implements Parcelable, Comparable<WirelessNetwork> 
 	 */
 	public WirelessNetwork(String ESSID, String BSSID, int signal, String capabilities) {
 		mEssid = ESSID;
-		mBssid = BSSID.toUpperCase();
+		mBssid = BSSID.toUpperCase(Locale.getDefault());
 		mPasswords = new ArrayList<String>();
 		mSignal = signal;
 		mCapabilities = WirelessEncryption.parseEncription(capabilities);
@@ -176,7 +177,7 @@ public class WirelessNetwork implements Parcelable, Comparable<WirelessNetwork> 
 		boolean c[] = new boolean[1];
 		in.readBooleanArray(c);
 		mCrackeable = c[0];
-		if (mPasswords == null)
+		if(mPasswords == null)
 			mPasswords = new ArrayList<String>();
 		in.readStringList(mPasswords);
 		mSignal = in.readInt();
@@ -291,8 +292,12 @@ public class WirelessNetwork implements Parcelable, Comparable<WirelessNetwork> 
 	public int compareTo(WirelessNetwork w0) {
 		if(this.isCrackeable() == w0.isCrackeable())
 			return w0.getSignal() - this.getSignal();
-		else
-			return 1;
+		else {
+			if(this.isCrackeable() && !w0.isCrackeable())
+				return -1;
+			else
+				return 1;
+		}
 	}
 
 	/**
@@ -300,6 +305,7 @@ public class WirelessNetwork implements Parcelable, Comparable<WirelessNetwork> 
 	 */
 	@Override
 	public String toString() {
-		return "WirelessNetwork [mEssid=" + mEssid + ", mBssid=" + mBssid + ", mCapabilities=" + mCapabilities + ", mCrackeable=" + mCrackeable + "]";
+		return "WirelessNetwork [mEssid=" + mEssid + ", mBssid=" + mBssid + ", mCapabilities="
+				+ mCapabilities + ", mCrackeable=" + mCrackeable + "]";
 	}
 }

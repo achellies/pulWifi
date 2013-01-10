@@ -19,6 +19,8 @@
 
 package es.pulimento.wifi.core.algorithms;
 
+import java.util.Locale;
+
 import es.pulimento.wifi.core.WirelessNetwork.WirelessEncryption;
 
 /**
@@ -52,7 +54,7 @@ public class DlinkAlgorithm extends CrackAlgorithm {
 	@Override
 	protected String crackAlgorithm(String essid_data, String bssid_data) {
 		// Delete dots from bssid and use caps only...
-		bssid_data = bssid_data.replace(":", "").toUpperCase();
+		bssid_data = bssid_data.replace(":", "").toUpperCase(Locale.getDefault());
 
 		// Select inportant data from bssid...
 		char[] data = new char[20];
@@ -79,7 +81,8 @@ public class DlinkAlgorithm extends CrackAlgorithm {
 
 		// Process key throught the real algorithm...
 		char[] key = new char[20];
-		char hash[] = { 'X', 'r', 'q', 'a', 'H', 'N', 'p', 'd', 'S', 'Y', 'w', '8', '6', '2', '1', '5' };
+		char hash[] = { 'X', 'r', 'q', 'a', 'H', 'N', 'p', 'd', 'S', 'Y', 'w', '8', '6', '2', '1',
+				'5' };
 		int index = 0;
 		for(int i = 0; i < 20; i++) {
 			if((data[i] >= '0') && (data[i] <= '9'))

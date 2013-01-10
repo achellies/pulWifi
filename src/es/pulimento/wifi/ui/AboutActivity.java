@@ -40,10 +40,11 @@ public class AboutActivity extends SherlockActivity implements OnClickListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.layout_about);
+		setContentView(R.layout.activity_about);
 
 		// Make links clickable
-		((TextView) findViewById(R.id.act_about_text)).setMovementMethod(LinkMovementMethod.getInstance());
+		((TextView) findViewById(R.id.act_about_text)).setMovementMethod(LinkMovementMethod
+				.getInstance());
 
 		// Set click listeners ...
 		((Button) findViewById(R.id.act_about_license_button)).setOnClickListener(this);
@@ -53,7 +54,7 @@ public class AboutActivity extends SherlockActivity implements OnClickListener {
 
 	@Override
 	public void onClick(View v) {
-		switch (v.getId()) {
+		switch(v.getId()) {
 			case R.id.act_about_license_button:
 				(new LicenseDialog(AboutActivity.this)).show();
 				break;
@@ -65,7 +66,7 @@ public class AboutActivity extends SherlockActivity implements OnClickListener {
 				break;
 		}
 	}
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getSupportMenuInflater().inflate(R.menu.menu_aboutactivity, menu);
@@ -74,7 +75,7 @@ public class AboutActivity extends SherlockActivity implements OnClickListener {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
+		switch(item.getItemId()) {
 			case R.id.menu_about_back:
 				this.finish();
 				break;

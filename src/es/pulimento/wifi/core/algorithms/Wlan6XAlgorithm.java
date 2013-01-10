@@ -21,9 +21,12 @@ package es.pulimento.wifi.core.algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import android.util.Log;
+import es.pulimento.wifi.BuildConfig;
 import es.pulimento.wifi.core.WirelessNetwork.WirelessEncryption;
+import es.pulimento.wifi.ui.utils.Constants;
 
 public class Wlan6XAlgorithm extends CrackAlgorithm {
 
@@ -57,7 +60,7 @@ public class Wlan6XAlgorithm extends CrackAlgorithm {
 
 	@Override
 	protected String crackAlgorithm(String essid_data, String bssid_data) {
-		bssid_data = bssid_data.toUpperCase();
+		bssid_data = bssid_data.toUpperCase(Locale.getDefault());
 
 		return crack2(essid_data, bssid_data);
 	}
@@ -65,7 +68,8 @@ public class Wlan6XAlgorithm extends CrackAlgorithm {
 	public static String crack2(String ESSID, String BSSID) {
 		String ssidStr = ESSID.substring(ESSID.length() - 6);
 		String macStr = BSSID;
-		Log.e("pulWifi", "Using new WLAN6X algorythm, " + ssidStr + " " + macStr);
+		if(BuildConfig.DEBUG)
+			Log.e(Constants.TAG, "Using new WLAN6X algorythm, " + ssidStr + " " + macStr);
 		char[] ssidSubPart = { '1', '2', '3', '4', '5', '6' };// These values
 															  // are not
 															  // revelant.
@@ -79,16 +83,20 @@ public class Wlan6XAlgorithm extends CrackAlgorithm {
 		ssidSubPart[5] = ssidStr.charAt(5);
 		bssidLastByte[0] = macStr.charAt(15);
 		bssidLastByte[1] = macStr.charAt(16);
-		for (int k = 0; k < 6; ++k)
-			if (ssidSubPart[k] >= 'A') ssidSubPart[k] = (char) (ssidSubPart[k] - 55);
+		for(int k = 0; k < 6; ++k)
+			if(ssidSubPart[k] >= 'A')
+				ssidSubPart[k] = (char) (ssidSubPart[k] - 55);
 
-		if (bssidLastByte[0] >= 'A') bssidLastByte[0] = (char) (bssidLastByte[0] - 55);
-		if (bssidLastByte[1] >= 'A') bssidLastByte[1] = (char) (bssidLastByte[1] - 55);
+		if(bssidLastByte[0] >= 'A')
+			bssidLastByte[0] = (char) (bssidLastByte[0] - 55);
+		if(bssidLastByte[1] >= 'A')
+			bssidLastByte[1] = (char) (bssidLastByte[1] - 55);
 
 		List<String> passList = new ArrayList<String>();
-		for (int i = 0; i < 10; ++i) {
+		for(int i = 0; i < 10; ++i) {
 			/* Do not change the order of this instructions */
-			int aux = i + (ssidSubPart[3] & 0xf) + (bssidLastByte[0] & 0xf) + (bssidLastByte[1] & 0xf);
+			int aux = i + (ssidSubPart[3] & 0xf) + (bssidLastByte[0] & 0xf)
+					+ (bssidLastByte[1] & 0xf);
 			int aux1 = (ssidSubPart[1] & 0xf) + (ssidSubPart[2] & 0xf) + (ssidSubPart[4] & 0xf)
 					+ (ssidSubPart[5] & 0xf);
 			int second = aux ^ (ssidSubPart[5] & 0xf);
@@ -112,12 +120,13 @@ public class Wlan6XAlgorithm extends CrackAlgorithm {
 					+ Integer.toHexString(eleventh & 0xf) + Integer.toHexString(twelfth & 0xf)
 					+ Integer.toHexString(thirteenth & 0xf);
 
-			passList.add(key.toUpperCase());
+			passList.add(key.toUpperCase(Locale.getDefault()));
 		}
 		StringBuilder s = new StringBuilder();
-		for (String sp : passList)
+		for(String sp : passList)
 			s.append(sp + "\n");
-		Log.d("pulWifi", "CLAVE -> " + s.toString());
+		if(BuildConfig.DEBUG)
+		Log.d(Constants.TAG, "CLAVE -> " + s.toString());
 		return s.toString();
 	}
 

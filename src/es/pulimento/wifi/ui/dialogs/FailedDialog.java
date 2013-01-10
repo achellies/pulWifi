@@ -37,7 +37,8 @@ public class FailedDialog extends AlertDialog implements OnClickListener {
 		mActivity = activity;
 		this.setTitle(R.string.mainactivity_failed_dialog_error);
 		this.setMessage(context.getString(R.string.mainactivity_failed_dialog_msg));
-		this.setButton(BUTTON_NEUTRAL, context.getString(R.string.mainactivity_failed_dialog_ok_button), this);
+		this.setButton(BUTTON_NEUTRAL,
+				context.getString(R.string.mainactivity_failed_dialog_ok_button), this);
 	}
 
 	@Override

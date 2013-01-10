@@ -1,12 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Dimensions - DEFAULT -->
 <resources>
-    
+
+    <!-- PagerHeader -->
+    <dimen name="pager_header_height">36dp</dimen>
     <dimen name="page_margin">10dp</dimen>
 
-    <!-- Dimensions for PagerHeaders -->
-    <dimen name="pager_header_height">32dp</dimen>
-    <dimen name="actionbar_compat_height">48dp</dimen>
-    <dimen name="actionbar_compat_button_width">48dp</dimen>
-    <dimen name="actionbar_compat_button_home_width">56dp</dimen>
+    <!-- Show password activity -->
+    <dimen name="showpass_font_title">36sp</dimen>
+    <dimen name="showpass_font_content">32sp</dimen>
+    <dimen name="showpass_button_lateral_margin">6dp</dimen>
+    <dimen name="showpass_font_button_normal">26sp</dimen>
+    <dimen name="showpass_font_button_small">22sp</dimen>
+    <dimen name="showpass_button_height">70dp</dimen>
+    <dimen name="showpass_button_margintop">12dp</dimen>
+
+    <!-- About activity, landscape -->
+    <dimen name="about_icon_size">80dp</dimen>
+    <dimen name="about_font_appname">18sp</dimen>
+    <dimen name="about_button_margintop">8dp</dimen>
+    <dimen name="about_topleftportion_margintop">10dp</dimen>
+    <dimen name="about_topleftportion_marginbottom">10dp</dimen>
+
+    <!-- Manual mode fragment, portrait -->
+    <dimen name="manual_port_toptext_margintop">4dp</dimen>
+    <dimen name="manual_port_toptext_marginbottom">12dp</dimen>
+    <dimen name="manual_port_toptext_marginleft">8dp</dimen>
+    <dimen name="manual_port_toptext_marginright">2dp</dimen>
+    <dimen name="manual_port_editbox_padding">18dp</dimen>
+    <dimen name="manual_port_editbox_linearlayout_margintop">10dp</dimen>
+    <dimen name="manual_port_editbox_security_marginleft">20dp</dimen>
+    <dimen name="manual_port_editbox_security_marginright">20dp</dimen>
+    <dimen name="manual_port_editbox_togglebutton_height">38dp</dimen>
+    <dimen name="manual_port_editbox_togglebutton_width">56dp</dimen>
+    <dimen name="manual_port_button_ok_width">90dp</dimen>
+    <dimen name="manual_port_button_ok_height">60dp</dimen>
+    <dimen name="manual_port_button_ok_margintop">20dp</dimen>
+    <dimen name="manual_port_button_ok_font">24sp</dimen>
+    <dimen name="manual_port_bottomtext_font">16sp</dimen>
+    <dimen name="manual_port_bottomtext_margin_right">2dp</dimen>
+    <dimen name="manual_port_bottomtext_margin_left">8dp</dimen>
+    <dimen name="manual_port_bottomtext_margin_top">10dp</dimen>
+    <dimen name="manual_port_ads_margintop">12dp</dimen>
 
 </resources>

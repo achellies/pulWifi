@@ -37,9 +37,12 @@
     <string name="dialog_updater_checking">"S'està comprovant…"</string>
     <string name="dialog_updater_positive">"Sí"</string>
     <string name="dialog_updater_negative">"No"</string>
+    <string name="dialog_updater_error">Error en l\'actualitzador</string>
+    <string name="dialog_updater_last">Tens la darrera versió disponible</string>
 
     <!-- Preference keys and defaults -->
     <!-- Really not neccesary here, they are language-independent -->
+
 
     <!-- Preferences -->
     <string name="preferences_category_scanmode">"MANERA D'EXPLORACIÓ"</string>
@@ -56,6 +59,8 @@
     <string name="preferences_about_summary">"Quant a aquesta versió"</string>
     <string name="preferences_updater_summary">Cercar actualitzacions manualment</string>
     <string name="preferences_updater_title">Updater</string>
+    <string name="preferences_localechooser_title">Escollir idioma</string>
+    <string name="preferences_localechooser_summary">Es requereix reiniciar</string>
 
     <!-- Main activity -->
     <string name="mainactivity_failed_dialog_error">"S'ha produït un error"</string>
@@ -71,8 +76,9 @@
     <string name="manualcrack_essid_hint">"Nom de la xarxa"</string>
     <string name="manualcrack_bottom">"Podeu veure una llista de les xarxes de suport amb la tecla de menú"</string>
     <string name="manualcrack_bssid_hint">"MAC Adress"</string>
-    <string name="manualcrack_crackbutton">"Crack"</string>
+    <string name="manualcrack_crackbutton">"OK"</string>
     <string name="manualcrack_inputerror">"Una mala entrada. Si us plau, mireu una llista completa de les xarxes de suport amb la tecla de menú."</string>
+    <string name="manualcrack_security">Seguretat</string>
 
     <!-- Select wireless network activity -->
     <string name="selectwireless_unsupported">"La xarxa no compatible. Les xarxes de suport tenen marcadors de color verd."</string>

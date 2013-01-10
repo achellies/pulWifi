@@ -25,22 +25,18 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Handler;
 import es.pulimento.wifi.R;
 
 public class UpdateDialog extends AlertDialog implements OnClickListener {
 
 	private String mUri;
 	private Context mContext;
-	private Handler mHandler;
 
-	public UpdateDialog(Context context, String uri, Handler handler) {
+	public UpdateDialog(Context context, String uri) {
 		super(context);
 
 		mUri = uri;
 		mContext = context;
-		mHandler = handler;
-
 		this.setCancelable(false);
 		this.setTitle(R.string.dialog_updater_title);
 		this.setMessage(mContext.getText(R.string.dialog_updater_message));
@@ -52,13 +48,12 @@ public class UpdateDialog extends AlertDialog implements OnClickListener {
 	public void onClick(DialogInterface dialog, int which) {
 		this.dismiss();
 		switch(which) {
-		case BUTTON_POSITIVE:
-			mContext.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(mUri)));
-			break;
-		case BUTTON_NEGATIVE:
-			this.dismiss();
-			break;
+			case BUTTON_POSITIVE:
+				mContext.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(mUri)));
+				break;
+			case BUTTON_NEGATIVE:
+				this.dismiss();
+				break;
 		}
-		mHandler.sendEmptyMessage(0);
 	}
 }

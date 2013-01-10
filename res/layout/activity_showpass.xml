@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <!-- on portrait, could be THIS layout always, with @dimen -->
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/ads"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/showpass_network_name"
+            android:textColor="#FF0000"
+            android:textSize="@dimen/showpass_font_title" />
+
+        <TextView
+            android:id="@+id/layout_showpass_essid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textSize="@dimen/showpass_font_content"
+            android:color="#0000FF" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/showpass_network_mac"
+            android:textColor="#FF0000"
+            android:textSize="@dimen/showpass_font_title" />
+
+        <TextView
+            android:id="@+id/layout_showpass_bssid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textSize="@dimen/showpass_font_content"
+            android:color="#0000FF" />
+
+        <Button
+            android:id="@+id/layout_showpass_show"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/showpass_button_height"
+            android:layout_marginLeft="@dimen/showpass_button_lateral_margin"
+            android:layout_marginRight="@dimen/showpass_button_lateral_margin"
+            android:layout_marginTop="@dimen/showpass_button_margintop"
+            android:singleLine="true"
+            android:text="@string/showpass_button_showpass"
+            android:textSize="@dimen/showpass_font_button_normal"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/layout_showpass_clipboard"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/showpass_button_height"
+            android:layout_marginLeft="@dimen/showpass_button_lateral_margin"
+            android:layout_marginRight="@dimen/showpass_button_lateral_margin"
+            android:layout_marginTop="@dimen/showpass_button_margintop"
+            android:singleLine="true"
+            android:text="@string/showpass_button_clipboard"
+            android:textSize="@dimen/showpass_font_button_small"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    
+    <com.google.ads.AdView
+        android:id="@+id/ads"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        ads:adSize="SMART_BANNER"
+        ads:adUnitId="a14de2ce2207597"
+        ads:loadAdOnCreate="true"
+        ads:testDevices="@string/admob_ads_test_devices" />
+   
+
+</RelativeLayout>
