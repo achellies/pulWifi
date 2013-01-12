@@ -20,7 +20,7 @@ public class GithubApi {
 
 	// Constants...
 	private final static String URL_ISSUES = "https://api.github.com/repos/pulWifi/pulWifi/issues";
-	private final static String URL_DOWNLOADS = "http://pulwifi.github.com/v2/downloads/downloads.json";
+	private final static String URL_DOWNLOADS = "http://pulwifi.github.com/downloads/downloads.json";
 	
 	// Variables...
 	private Boolean mAuthed;
