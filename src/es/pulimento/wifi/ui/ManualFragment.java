@@ -65,6 +65,7 @@ public class ManualFragment extends Fragment implements OnClickListener {
 				: mToggleButton.getTextOff());
 		WirelessNetwork mWirelessNetwork = new WirelessNetwork(mEditTextEssid.getText().toString(),
 				mEditTextBssid.getText().toString(), 1, capabilities);
+
 		if(!mWirelessNetwork.isCrackeable()) {
 			Toast.makeText(getActivity().getApplicationContext(), R.string.manualcrack_inputerror,
 					Toast.LENGTH_LONG).show();
@@ -77,5 +78,4 @@ public class ManualFragment extends Fragment implements OnClickListener {
 		startActivity(i);
 		return;
 	}
-
 }

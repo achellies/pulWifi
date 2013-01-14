@@ -7,6 +7,7 @@ import java.lang.Thread.UncaughtExceptionHandler;
 import android.annotation.SuppressLint;
 import android.content.pm.PackageInfo;
 import android.util.Log;
+import es.pulimento.wifi.BuildConfig;
 import es.pulimento.wifi.ui.utils.github.GithubApi;
 import es.pulimento.wifi.ui.utils.github.Issue;
 
@@ -36,6 +37,8 @@ public class ExceptionHandler implements UncaughtExceptionHandler {
 	// Code requiring API > 11 here really doesn't run on pre-HoneyComb devices
 	@Override
 	public void uncaughtException(Thread t, Throwable e) {
+		
+		if(!BuildConfig.DEBUG) {
 		Log.e(Constants.TAG, "Uncaught exception!! Reporting...");
 		
 		// Format string version to add to the report
@@ -68,7 +71,8 @@ public class ExceptionHandler implements UncaughtExceptionHandler {
 		Thread thread = new Thread(runnable);
 		thread.start();
 		thread.run();
-
+		}
+		
 		// Fallback
 		mDefaultHandler.uncaughtException(t, e);
 	}

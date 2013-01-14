@@ -37,6 +37,7 @@ import android.os.Vibrator;
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.ListFragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -155,13 +156,13 @@ public class SelectWirelessNetworkFragment extends ListFragment implements OnCli
 			mAdapter.clear();
 
 			for(ScanResult wifi : mWifiManager.getScanResults())
-				mAdapter.add(new WirelessNetwork(wifi));
+					mAdapter.add(new WirelessNetwork(wifi));
 
 			// For testing networks...
 			if(BuildConfig.DEBUG) {
 				// ALGO: Andared
 				// KEY: 6b629f4c299371737494c61b5a101693a2d4e9e1f3e1320f3ebf9ae379cecf32
-				mAdapter.add(new WirelessNetwork("Andared", "AA:AA:AA:AA:AA:AA", 0, "[WPA]")); 
+				mAdapter.add(new WirelessNetwork("Andared", "AA:AA:AA:AA:AA:AA", 0, "[WPA]"));
 
 				// mWirelessNetList.add(new WirelessNetwork("InfostradaWiFi-002560",
 				// "00:E0:4D:90:E1:E0", 0, "[WPA]")); // ALGO: Infostrada KEY: 200E04D90E1E0
@@ -284,7 +285,7 @@ class Adapter extends ArrayAdapter<WirelessNetwork> {
 			TextView capabilities = (TextView) convertView
 					.findViewById(R.id.layout_selecwireless_listitem_security);
 			if(capabilities != null)
-				capabilities.setText(item.getCapabilities().toStringId());
+				capabilities.setText(item.getCapabilities().toString());
 		}
 		return convertView;
 	}
