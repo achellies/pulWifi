@@ -7,9 +7,6 @@ import org.json.JSONStringer;
 
 public class Issue {
 
-	/**
-	 * 
-	 */
 	private String mTitle;
 	private String mBody;
 	private JSONArray mLabels;
@@ -33,10 +30,8 @@ public class Issue {
 		mTitle = title;
 		mBody = body;
 		mLabels = new JSONArray();
-		mLabels.put(label[0]);
-		// Multiple tags
-		if(label[1] != null)
-			mLabels.put(label[1]);
+		for(String l : label)
+			mLabels.put(l);
 	}
 
 	public String getTitle() {
@@ -73,4 +68,16 @@ public class Issue {
 		return null;
 	}
 
+	@Override
+	public boolean equals(Object other){
+	    if (other == null) return false;
+	    if (other == this) return true;
+	    if (!(other instanceof Issue))return false;
+	    return ((Issue)other).getTitle() == this.getTitle();
+	}
+	
+	@Override
+	public int hashCode() {
+		return this.getTitle().hashCode();
+	}
 }

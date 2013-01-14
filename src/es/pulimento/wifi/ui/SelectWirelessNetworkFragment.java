@@ -19,9 +19,7 @@
 
 package es.pulimento.wifi.ui;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.Comparator;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -31,7 +29,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
-import android.database.DataSetObserver;
 import android.graphics.drawable.Drawable;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
@@ -44,10 +41,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -57,7 +54,6 @@ import es.pulimento.wifi.core.WirelessNetwork;
 
 public class SelectWirelessNetworkFragment extends ListFragment implements OnClickListener {
 
-	private ArrayList<WirelessNetwork> mWirelessNetList;
 	private WifiManager mWifiManager;
 	private Vibrator mVibrator;
 	private LinearLayout mRefreshSection;
@@ -66,6 +62,7 @@ public class SelectWirelessNetworkFragment extends ListFragment implements OnCli
 	private FragmentActivity mActivity;
 	private IntentFilter mIntentFilter;
 	private MBroadcastReceiver mBroadcastReceiver;
+	private Adapter mAdapter;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -76,15 +73,11 @@ public class SelectWirelessNetworkFragment extends ListFragment implements OnCli
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 
-		if(savedInstanceState != null) {
-			mWirelessNetList = savedInstanceState.getParcelableArrayList("networks");
-		} else {
-			mWirelessNetList = new ArrayList<WirelessNetwork>();
-		}
-
 		mActivity = getActivity();
-
-		setListAdapter(new NetworkListAdapter(mWirelessNetList, mActivity));
+		mAdapter = new Adapter(mActivity, 0);
+		
+		setListAdapter(mAdapter);
+		
 		mWifiManager = (WifiManager) mActivity.getSystemService(Context.WIFI_SERVICE);
 		mVibrator = (Vibrator) mActivity.getSystemService(Context.VIBRATOR_SERVICE);
 		mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(mActivity);
@@ -132,12 +125,6 @@ public class SelectWirelessNetworkFragment extends ListFragment implements OnCli
 	}
 
 	@Override
-	public void onSaveInstanceState(Bundle outState) {
-		outState.putParcelableArrayList("networks", mWirelessNetList);
-		super.onSaveInstanceState(outState);
-	}
-
-	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
 		WirelessNetwork w = (WirelessNetwork) this.getListAdapter().getItem(position);
@@ -165,18 +152,17 @@ public class SelectWirelessNetworkFragment extends ListFragment implements OnCli
 
 		@Override
 		public void run() {
-			mWirelessNetList.clear();
+			mAdapter.clear();
 
 			for(ScanResult wifi : mWifiManager.getScanResults())
-				mWirelessNetList.add(new WirelessNetwork(wifi));
+				mAdapter.add(new WirelessNetwork(wifi));
 
 			// For testing networks...
 			if(BuildConfig.DEBUG) {
-				mWirelessNetList
-						.add(new WirelessNetwork("Andared", "AA:AA:AA:AA:AA:AA", 0, "[WPA]")); // ALGO:
-																							   // Andared
-																							   // KEY:
-				// 6b629f4c299371737494c61b5a101693a2d4e9e1f3e1320f3ebf9ae379cecf32
+				// ALGO: Andared
+				// KEY: 6b629f4c299371737494c61b5a101693a2d4e9e1f3e1320f3ebf9ae379cecf32
+				mAdapter.add(new WirelessNetwork("Andared", "AA:AA:AA:AA:AA:AA", 0, "[WPA]")); 
+
 				// mWirelessNetList.add(new WirelessNetwork("InfostradaWiFi-002560",
 				// "00:E0:4D:90:E1:E0", 0, "[WPA]")); // ALGO: Infostrada KEY: 200E04D90E1E0
 				// mWirelessNetList.add(new WirelessNetwork("Discus--DA1CC5", "00:1C:A2:DA:1C:C5",
@@ -203,8 +189,8 @@ public class SelectWirelessNetworkFragment extends ListFragment implements OnCli
 				// -100, "[WPA]")); //29b2e9560b3a83a187ec5f2057
 			}
 
-			// Refresh list...
-			getListView().invalidateViews();
+			mAdapter.sort();
+			mAdapter.notifyDataSetChanged();
 
 			if(mSharedPreferences.getBoolean(Preferences.PREFERENCES_VIBRATEUPDATE_KEY,
 					Preferences.PREFERENCES_VIBRATEUPDATE_DEFAULT))
@@ -226,21 +212,22 @@ public class SelectWirelessNetworkFragment extends ListFragment implements OnCli
 	}
 }
 
-class NetworkListAdapter implements ListAdapter {
+class Adapter extends ArrayAdapter<WirelessNetwork> {
 
-	private List<WirelessNetwork> mItems;
+	private Context mContext;
 	private Drawable mDrawLocked, mDrawUnlocked;
 	private Drawable mSignalLevel1, mSignalLevel2, mSignalLevel3, mSignalLevel4, mSignalLevel5;
 	private LayoutInflater mLayoutInflater;
 
-	public NetworkListAdapter(List<WirelessNetwork> items, Context mContext) {
-
-		Resources res = mContext.getResources();
-		mItems = new ArrayList<WirelessNetwork>();
-		mItems = items;
+	public Adapter(Context context, Integer invalid) {
+		super(context, invalid);
+		mContext = context;
+		
 		mLayoutInflater = (LayoutInflater) mContext.getApplicationContext().getSystemService(
 				Context.LAYOUT_INFLATER_SERVICE);
 
+		Resources res = mContext.getResources();
+		
 		mDrawLocked = res.getDrawable(R.drawable.ic_locked_new);
 		mDrawUnlocked = res.getDrawable(R.drawable.ic_unlocked_new);
 
@@ -251,27 +238,23 @@ class NetworkListAdapter implements ListAdapter {
 		mSignalLevel5 = res.getDrawable(R.drawable.ic_signal_new_5);
 	}
 
-	@Override
-	public int getCount() {
-		return mItems.size();
-	}
-
-	@Override
-	public Object getItem(int position) {
-		return mItems.get(position);
+	public void sort() {
+		this.sort(new Comparator<WirelessNetwork>() {
+			@Override
+			public int compare(WirelessNetwork arg0, WirelessNetwork arg1) {
+				return arg0.compareTo(arg1);
+			};
+		});
 	}
 
 	@SuppressWarnings("deprecation")
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 
-		/* Sort items before showing them. */
-		Collections.sort(mItems);
-
 		if(convertView == null)
 			convertView = mLayoutInflater.inflate(R.layout.listitem_wirelessnetwork, null);
 
-		WirelessNetwork item = mItems.get(position);
+		WirelessNetwork item = this.getItem(position);
 		if(item != null) {
 			TextView crackeable = (TextView) convertView
 					.findViewById(R.id.layout_selecwireless_listitem_crackeable);
@@ -304,48 +287,5 @@ class NetworkListAdapter implements ListAdapter {
 				capabilities.setText(item.getCapabilities().toStringId());
 		}
 		return convertView;
-	}
-
-	@Override
-	public boolean isEmpty() {
-		return mItems.isEmpty();
-	}
-
-	@Override
-	public long getItemId(int position) {
-		return position;
-	}
-
-	@Override
-	public int getItemViewType(int position) {
-		return 1;
-	}
-
-	@Override
-	public int getViewTypeCount() {
-		return 1;
-	}
-
-	@Override
-	public boolean hasStableIds() {
-		return false;
-	}
-
-	@Override
-	public void registerDataSetObserver(DataSetObserver observer) {
-	}
-
-	@Override
-	public void unregisterDataSetObserver(DataSetObserver observer) {
-	}
-
-	@Override
-	public boolean areAllItemsEnabled() {
-		return true;
-	}
-
-	@Override
-	public boolean isEnabled(int position) {
-		return true;
 	}
 }
