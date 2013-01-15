@@ -37,7 +37,6 @@ import android.os.Vibrator;
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.ListFragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -217,7 +216,7 @@ class Adapter extends ArrayAdapter<WirelessNetwork> {
 
 	private Context mContext;
 	private Drawable mDrawLocked, mDrawUnlocked;
-	private Drawable mSignalLevel1, mSignalLevel2, mSignalLevel3, mSignalLevel4, mSignalLevel5;
+	private Drawable mSignalLevelDrawables[];
 	private LayoutInflater mLayoutInflater;
 
 	public Adapter(Context context, Integer invalid) {
@@ -232,11 +231,12 @@ class Adapter extends ArrayAdapter<WirelessNetwork> {
 		mDrawLocked = res.getDrawable(R.drawable.ic_locked_new);
 		mDrawUnlocked = res.getDrawable(R.drawable.ic_unlocked_new);
 
-		mSignalLevel1 = res.getDrawable(R.drawable.ic_signal_new_1);
-		mSignalLevel2 = res.getDrawable(R.drawable.ic_signal_new_2);
-		mSignalLevel3 = res.getDrawable(R.drawable.ic_signal_new_3);
-		mSignalLevel4 = res.getDrawable(R.drawable.ic_signal_new_4);
-		mSignalLevel5 = res.getDrawable(R.drawable.ic_signal_new_5);
+		mSignalLevelDrawables = new Drawable[5];
+		mSignalLevelDrawables[0] = res.getDrawable(R.drawable.ic_signal_new_1);
+		mSignalLevelDrawables[1] = res.getDrawable(R.drawable.ic_signal_new_2);
+		mSignalLevelDrawables[2] = res.getDrawable(R.drawable.ic_signal_new_3);
+		mSignalLevelDrawables[3] = res.getDrawable(R.drawable.ic_signal_new_4);
+		mSignalLevelDrawables[4] = res.getDrawable(R.drawable.ic_signal_new_5);
 	}
 
 	public void sort() {
@@ -275,12 +275,8 @@ class Adapter extends ArrayAdapter<WirelessNetwork> {
 
 			ImageView signal = (ImageView) convertView
 					.findViewById(R.id.layout_selecwireless_listitem_strength);
-			if(signal != null) {
-				int signalLevel = WifiManager.calculateSignalLevel(item.getSignal(), 5);
-				signal.setImageDrawable((signalLevel == 0) ? mSignalLevel1
-						: (signalLevel == 1) ? mSignalLevel2 : (signalLevel == 2) ? mSignalLevel3
-								: (signalLevel == 3) ? mSignalLevel4 : mSignalLevel5);
-			}
+			if(signal != null)
+				signal.setImageDrawable(mSignalLevelDrawables[WifiManager.calculateSignalLevel(item.getSignal(), 5)]);
 
 			TextView capabilities = (TextView) convertView
 					.findViewById(R.id.layout_selecwireless_listitem_security);
